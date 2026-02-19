@@ -1,0 +1,2022 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ふじた電気探求所 - 事業計画書</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    /* ===== リセット・ベース ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #1a237e;
+      --primary-light: #3949ab;
+      --primary-dark: #0d1642;
+      --accent: #ff6f00;
+      --accent-light: #ffa040;
+      --accent-soft: #fff3e0;
+      --success: #2e7d32;
+      --success-light: #e8f5e9;
+      --info: #0277bd;
+      --info-light: #e1f5fe;
+      --danger: #c62828;
+      --bg: #f8f9fc;
+      --card: #ffffff;
+      --text: #1a1a2e;
+      --text-light: #5a5a7a;
+      --border: #e8e8f0;
+      --shadow: 0 4px 24px rgba(26, 35, 126, 0.08);
+      --shadow-lg: 0 8px 40px rgba(26, 35, 126, 0.12);
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans JP', 'Zen Kaku Gothic New', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== ナビゲーション ===== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(26, 35, 126, 0.95);
+      backdrop-filter: blur(12px);
+      padding: 0 2rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+    }
+    .nav-logo {
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+    }
+    .nav-logo span { color: var(--accent-light); }
+    .nav-links {
+      display: flex;
+      gap: 0.25rem;
+      list-style: none;
+      overflow-x: auto;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 0.4rem 0.75rem;
+      border-radius: 8px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .nav-links a:hover {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+    }
+
+    /* ===== ヒーローセクション ===== */
+    .hero {
+      margin-top: 60px;
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 40%, var(--primary-light) 100%);
+      color: #fff;
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,111,0,0.15) 0%, transparent 70%);
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(57,73,171,0.3) 0%, transparent 70%);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 0.4rem 1.2rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      backdrop-filter: blur(4px);
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.3;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+    .hero h1 span { color: var(--accent-light); }
+    .hero-sub {
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      font-weight: 400;
+      opacity: 0.9;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      line-height: 1.9;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-stat {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 1.2rem 2rem;
+      border-radius: var(--radius);
+      backdrop-filter: blur(8px);
+      min-width: 160px;
+    }
+    .hero-stat-value {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--accent-light);
+    }
+    .hero-stat-label {
+      font-size: 0.8rem;
+      opacity: 0.8;
+      margin-top: 0.2rem;
+    }
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-content {
+      flex: 1;
+      text-align: left;
+    }
+    .hero-content .hero-badge { margin-bottom: 1rem; }
+    .hero-content .hero-sub { margin-left: 0; margin-right: 0; text-align: left; }
+    .hero-visual {
+      flex-shrink: 0;
+      width: min(420px, 45vw);
+      max-width: 100%;
+    }
+    .hero-visual img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+      border: 3px solid rgba(255,255,255,0.2);
+      display: block;
+    }
+    .hero-reference-caption {
+      margin-top: 0.6rem;
+      font-size: 0.8rem;
+      opacity: 0.85;
+      text-align: center;
+    }
+
+    /* ===== コンテナ ===== */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ===== セクション ===== */
+    .section {
+      padding: 4rem 0;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .section-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    .section-desc {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    /* ===== カード ===== */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      border: 1px solid var(--border);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    /* ===== グリッド ===== */
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
+
+    /* ===== 事業コンセプト写真（何をするか） ===== */
+    .concept-photos {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+      margin-bottom: 2rem;
+    }
+    .concept-photo-item {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .concept-photo-item:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    .concept-photo-item img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+    }
+    .concept-photo-caption {
+      padding: 1rem 1.2rem;
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.6;
+      font-weight: 500;
+    }
+    .concept-photo-caption strong {
+      display: block;
+      color: var(--primary);
+      font-size: 0.95rem;
+      margin-bottom: 0.35rem;
+    }
+    @media (max-width: 768px) {
+      .concept-photos { grid-template-columns: 1fr; }
+    }
+
+    /* ===== 図解用SVG ===== */
+    .diagram-wrapper {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+      overflow-x: auto;
+    }
+    .diagram-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .diagram-wrapper svg {
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* ===== チャートカード ===== */
+    .chart-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      border: 1px solid var(--border);
+    }
+    .chart-card canvas {
+      max-height: 360px;
+    }
+
+    /* ===== テーブル ===== */
+    .table-wrapper {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    thead th {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: #fff;
+      padding: 0.9rem 1rem;
+      font-weight: 600;
+      text-align: left;
+      white-space: nowrap;
+    }
+    tbody td {
+      padding: 0.8rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: rgba(26, 35, 126, 0.02); }
+    .highlight-row td {
+      background: rgba(26, 35, 126, 0.05);
+      font-weight: 600;
+    }
+
+    /* ===== タグ・バッジ ===== */
+    .tag {
+      display: inline-block;
+      padding: 0.2rem 0.7rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .tag-primary { background: rgba(26,35,126,0.1); color: var(--primary); }
+    .tag-accent { background: var(--accent-soft); color: var(--accent); }
+    .tag-success { background: var(--success-light); color: var(--success); }
+    .tag-info { background: var(--info-light); color: var(--info); }
+
+    /* ===== ステップ ===== */
+    .steps {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .step-card {
+      flex: 1;
+      min-width: 240px;
+      max-width: 340px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2rem 1.5rem;
+      border: 1px solid var(--border);
+      text-align: center;
+      position: relative;
+    }
+    .step-num {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+    }
+    .step-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    .step-desc {
+      font-size: 0.88rem;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    /* ===== 引用・ステートメント ===== */
+    .statement {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 3rem 2.5rem;
+      text-align: center;
+      margin: 2rem 0;
+      position: relative;
+    }
+    .statement::before {
+      content: '"';
+      position: absolute;
+      top: 0.5rem;
+      left: 1.5rem;
+      font-size: 5rem;
+      opacity: 0.15;
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+    .statement p {
+      font-size: 1.05rem;
+      line-height: 2;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .statement .highlight {
+      color: var(--accent-light);
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    /* ===== ポジショニングマップ ===== */
+    .positioning-map {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      aspect-ratio: 1;
+    }
+
+    /* ===== 比較テーブル ===== */
+    .compare-highlight {
+      background: rgba(255, 111, 0, 0.06) !important;
+    }
+    .compare-header-us {
+      background: linear-gradient(135deg, var(--accent), #e65100) !important;
+    }
+
+    /* ===== ビジネスモデル図 ===== */
+    .biz-model-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+    }
+    .biz-flow-item {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.2rem;
+      text-align: center;
+      min-width: 130px;
+    }
+    .biz-flow-item.active {
+      border-color: var(--primary);
+      background: rgba(26,35,126,0.04);
+    }
+    .biz-flow-arrow {
+      font-size: 1.5rem;
+      color: var(--primary-light);
+      font-weight: 700;
+    }
+
+    /* ===== フッター ===== */
+    .footer {
+      background: var(--primary-dark);
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.85rem;
+    }
+
+    /* ===== アニメーション ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== KPI カード ===== */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .kpi-card {
+      background: var(--card);
+      border-radius: var(--radius-sm);
+      padding: 1.2rem;
+      border: 1px solid var(--border);
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .kpi-value {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--primary);
+    }
+    .kpi-label {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-top: 0.2rem;
+    }
+    .kpi-change {
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin-top: 0.3rem;
+    }
+    .kpi-up { color: var(--success); }
+    .kpi-accent .kpi-value { color: var(--accent); }
+
+    /* ===== タイムライン ===== */
+    .timeline {
+      position: relative;
+      padding-left: 2.5rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 12px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--primary), var(--accent));
+      border-radius: 4px;
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+      padding-left: 1rem;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.5rem;
+      top: 0.4rem;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--primary);
+      border: 3px solid var(--bg);
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+    .timeline-phase {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+    }
+    .timeline-desc {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    /* ===== レスポンシブ ===== */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero { padding: 3rem 1.5rem 2.5rem; }
+      .hero-inner { flex-direction: column; gap: 2rem; }
+      .hero-content { text-align: center; }
+      .hero-content .hero-sub { text-align: center; }
+      .hero-visual { width: 100%; max-width: 340px; margin: 0 auto; }
+      .hero-stats { gap: 1rem; }
+      .hero-stat { min-width: 130px; padding: 1rem; }
+      .section { padding: 2.5rem 0; }
+      .card { padding: 1.5rem; }
+      .statement { padding: 2rem 1.5rem; }
+    }
+
+    /* ===== 印刷用スタイル ===== */
+    @media print {
+      .nav { display: none; }
+      .hero { margin-top: 0; }
+      .fade-in { opacity: 1 !important; transform: none !important; }
+      body { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== ナビゲーション ===== -->
+<nav class="nav">
+  <div class="nav-logo">⚡ ふじた電気探求所 <span>事業計画書</span></div>
+  <ul class="nav-links">
+    <li><a href="#vision">ビジョン</a></li>
+    <li><a href="#service">サービス</a></li>
+    <li><a href="#business">ビジネスモデル</a></li>
+    <li><a href="#finance">収支計画</a></li>
+    <li><a href="#market">市場分析</a></li>
+    <li><a href="#social">社会的意義</a></li>
+  </ul>
+</nav>
+
+<!-- ===== ヒーロー ===== -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">📄 Business Plan 2026</div>
+      <h1>ふじた電気探求所<br><span>事業計画書</span></h1>
+      <p class="hero-sub">
+        動くトミカの世界へダイブ！<br>
+        遊びが「発明」に変わる、日本一小さな社会実験場
+      </p>
+    </div>
+    <div class="hero-visual">
+      <img id="hero-img" data-src="hero-diorama.png" alt="4階建て立体都市ジオラマ — トミカサイズの世界で探求・走行する舞台" width="600" height="400" loading="eager">
+      <p class="hero-reference-caption">参考：4階建て立体都市ジオラマ（地上3cmの視点で探求する舞台）</p>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-value">7坪</div>
+      <div class="hero-stat-label">省スペース運営</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-value">¥1,166万</div>
+      <div class="hero-stat-label">3期目 売上目標</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-value">68%</div>
+      <div class="hero-stat-label">3期目 利益率</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-value">FPV</div>
+      <div class="hero-stat-label">没入型体験</div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== 1. ビジョン ===== -->
+<section id="vision" class="section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-number">1</div>
+      <h2 class="section-title">事業概要とコンセプト</h2>
+      <p class="section-desc">トミカサイズの世界に入り込んで、遊びながら「エンジニアの芽」を育てる</p>
+    </div>
+
+    <!-- ビジョン図解 -->
+    <div class="diagram-wrapper fade-in">
+      <div class="diagram-title">🎯 事業コンセプト：「知識の消費者」から「創造者」へ</div>
+      <svg viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg" style="font-family:'Noto Sans JP',sans-serif">
+        <!-- 背景 -->
+        <defs>
+          <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#e8eaf6;stop-opacity:1"/>
+            <stop offset="100%" style="stop-color:#fff3e0;stop-opacity:1"/>
+          </linearGradient>
+          <filter id="shadow1" x="-5%" y="-5%" width="110%" height="120%">
+            <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.1"/>
+          </filter>
+        </defs>
+        <rect x="0" y="0" width="900" height="340" rx="16" fill="url(#grad1)"/>
+
+        <!-- 左: 現状 -->
+        <rect x="30" y="40" width="230" height="260" rx="14" fill="#fff" filter="url(#shadow1)" stroke="#c5cae9" stroke-width="1.5"/>
+        <rect x="30" y="40" width="230" height="44" rx="14" fill="#1a237e"/>
+        <rect x="30" y="70" width="230" height="14" fill="#1a237e"/>
+        <text x="145" y="68" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">😐 現状（消費者側）</text>
+        <text x="145" y="115" text-anchor="middle" fill="#5a5a7a" font-size="12.5">📺 動画を「見る」だけ</text>
+        <text x="145" y="145" text-anchor="middle" fill="#5a5a7a" font-size="12.5">🎮 ゲームを「遊ぶ」だけ</text>
+        <text x="145" y="175" text-anchor="middle" fill="#5a5a7a" font-size="12.5">🧸 おもちゃを「買う」だけ</text>
+        <text x="145" y="215" text-anchor="middle" fill="#c62828" font-size="11" font-weight="600">正解を消費するだけ</text>
+        <text x="145" y="240" text-anchor="middle" fill="#c62828" font-size="11" font-weight="600">壊れたら「捨てる」</text>
+        <text x="145" y="278" text-anchor="middle" fill="#999" font-size="10">受動的 / デジタル偏重</text>
+
+        <!-- 中央: ふじた電気探求所 -->
+        <rect x="320" y="20" width="260" height="300" rx="14" fill="#fff" filter="url(#shadow1)" stroke="#ff6f00" stroke-width="2.5"/>
+        <rect x="320" y="20" width="260" height="44" rx="14" fill="#ff6f00"/>
+        <rect x="320" y="50" width="260" height="14" fill="#ff6f00"/>
+        <text x="450" y="48" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">⚡ ふじた電気探求所</text>
+        <text x="450" y="95" text-anchor="middle" fill="#1a237e" font-size="13" font-weight="600">🏙️ ジオラマ都市 × FPVカメラ</text>
+        <text x="450" y="125" text-anchor="middle" fill="#1a237e" font-size="12">カメラ越し「地上3cm視点」で走る</text>
+        <text x="450" y="160" text-anchor="middle" fill="#1a237e" font-size="13" font-weight="600">🔧 壊れたら「分解して学ぶ」</text>
+        <text x="450" y="185" text-anchor="middle" fill="#1a237e" font-size="12">故障＝中身を知るチャンス</text>
+        <text x="450" y="220" text-anchor="middle" fill="#1a237e" font-size="13" font-weight="600">🖨️ 3Dプリンタで「作る」</text>
+        <text x="450" y="245" text-anchor="middle" fill="#1a237e" font-size="12">自分だけのパーツを設計</text>
+        <text x="450" y="290" text-anchor="middle" fill="#ff6f00" font-size="12" font-weight="700">物理フィードバック × 試行錯誤</text>
+
+        <!-- 右: 未来 -->
+        <rect x="640" y="40" width="230" height="260" rx="14" fill="#fff" filter="url(#shadow1)" stroke="#2e7d32" stroke-width="1.5"/>
+        <rect x="640" y="40" width="230" height="44" rx="14" fill="#2e7d32"/>
+        <rect x="640" y="70" width="230" height="14" fill="#2e7d32"/>
+        <text x="755" y="68" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">🚀 未来（創造者側）</text>
+        <text x="755" y="115" text-anchor="middle" fill="#5a5a7a" font-size="12.5">🔬 仕組みを「理解」できる</text>
+        <text x="755" y="145" text-anchor="middle" fill="#5a5a7a" font-size="12.5">🛠️ 壊れても「直せる」</text>
+        <text x="755" y="175" text-anchor="middle" fill="#5a5a7a" font-size="12.5">💡 アイデアを「形に」できる</text>
+        <text x="755" y="215" text-anchor="middle" fill="#2e7d32" font-size="11" font-weight="600">問いを自ら立てられる</text>
+        <text x="755" y="240" text-anchor="middle" fill="#2e7d32" font-size="11" font-weight="600">AIに代替されない力</text>
+        <text x="755" y="278" text-anchor="middle" fill="#999" font-size="10">能動的 / レジリエンス</text>
+
+        <!-- 矢印 -->
+        <path d="M265 170 L315 170" stroke="#ff6f00" stroke-width="3" fill="none" marker-end="url(#arrowOrange)"/>
+        <path d="M585 170 L635 170" stroke="#2e7d32" stroke-width="3" fill="none" marker-end="url(#arrowGreen)"/>
+        <defs>
+          <marker id="arrowOrange" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+            <path d="M0,0 L10,4 L0,8" fill="#ff6f00"/>
+          </marker>
+          <marker id="arrowGreen" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+            <path d="M0,0 L10,4 L0,8" fill="#2e7d32"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <!-- コアバリュー -->
+    <div class="grid-2 fade-in">
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon" style="background:#e8eaf6;color:#1a237e">🎥</div>
+          没入感の創出
+        </div>
+        <p style="font-size:0.9rem;color:var(--text-light);margin-bottom:1rem">
+          4階建ての立体都市ジオラマを舞台に、カメラ映像を頼りに運転。肉眼では見えない死角を探検・謎解きする。
+        </p>
+        <span class="tag tag-primary">空間認識能力</span>
+        <span class="tag tag-info">立体構造の把握</span>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon" style="background:#fff3e0;color:#ff6f00">🔄</div>
+          視点の転換（リフレーミング）
+        </div>
+        <p style="font-size:0.9rem;color:var(--text-light);margin-bottom:1rem">
+          運転席の視点（地上3センチ）になることで、普段見慣れた世界が全く新しい発見と学びの場に変わる。
+        </p>
+        <span class="tag tag-accent">観察力</span>
+        <span class="tag tag-success">危険予知</span>
+      </div>
+    </div>
+
+    <!-- 実際に何をするのか（3枚の写真で伝える） -->
+    <h3 style="text-align:center;font-size:1.15rem;font-weight:700;color:var(--primary);margin-bottom:0.5rem" class="fade-in">📷 実際に何をするのか — イメージで伝える</h3>
+    <p style="text-align:center;font-size:0.9rem;color:var(--text-light);margin-bottom:0;max-width:600px;margin-left:auto;margin-right:auto" class="fade-in">ラジコンと3Dプリンタと電気の応用で、遊びながら「発明」する体験の具体像です。</p>
+    <div class="concept-photos fade-in">
+      <div class="concept-photo-item">
+        <img class="concept-img" data-src="concept-fpv.png" alt="スマホでFPV映像を見ながらラジコンを操作">
+        <div class="concept-photo-caption">
+          <strong>① FPVで「車の目」になる</strong>
+          Wi-Fiで接続し、スマホに映るリアルタイム映像を見ながら操作。車体の目線（地上3cm）でジオラマを走り、探検する。
+        </div>
+      </div>
+      <div class="concept-photo-item">
+        <img class="concept-img" data-src="concept-diorama.png" alt="トミカの世界のジオラマ都市を走行">
+        <div class="concept-photo-caption">
+          <strong>② トミカの世界で走る</strong>
+          立体都市ジオラマ（道路・建物・街並み）を舞台に、カメラ越しで没入。フリー走行やミッションで「遊び」がそのまま学びに。
+        </div>
+      </div>
+      <div class="concept-photo-item">
+        <img class="concept-img" data-src="concept-3d.png" alt="3Dプリントの駐車場とカスタム車両・LED">
+        <div class="concept-photo-caption">
+          <strong>③ 3Dプリント＆電気で自分だけの一台に</strong>
+          駐車場やパーツを3Dプリンタで制作。LEDやカスタムボディで「電気の応用」を体験し、壊して直すからこそ身につく。
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 2. サービス展開 ===== -->
+<section id="service" class="section" style="background: linear-gradient(180deg, #f0f1ff 0%, var(--bg) 100%)">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-number">2</div>
+      <h2 class="section-title">サービス展開</h2>
+      <p class="section-desc">平日と休日でハイブリッド運営。資産の稼働率を最大化します</p>
+    </div>
+
+    <!-- ハイブリッドモデル図解 -->
+    <div class="diagram-wrapper fade-in">
+      <div class="diagram-title">🔄 ハイブリッド運営モデル</div>
+      <svg viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg" style="font-family:'Noto Sans JP',sans-serif">
+        <defs>
+          <linearGradient id="gradWeekday" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#1a237e;stop-opacity:1"/>
+            <stop offset="100%" style="stop-color:#3949ab;stop-opacity:1"/>
+          </linearGradient>
+          <linearGradient id="gradWeekend" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#ff6f00;stop-opacity:1"/>
+            <stop offset="100%" style="stop-color:#ffa040;stop-opacity:1"/>
+          </linearGradient>
+          <filter id="shadow2" x="-5%" y="-5%" width="110%" height="115%">
+            <feDropShadow dx="0" dy="3" stdDeviation="5" flood-opacity="0.12"/>
+          </filter>
+        </defs>
+
+        <!-- 中央：施設 -->
+        <rect x="310" y="120" width="280" height="140" rx="16" fill="#fff" filter="url(#shadow2)" stroke="#e8e8f0" stroke-width="1.5"/>
+        <text x="450" y="160" text-anchor="middle" fill="#1a237e" font-size="16" font-weight="800">⚡ ふじた電気探求所</text>
+        <text x="450" y="185" text-anchor="middle" fill="#5a5a7a" font-size="12">7坪の小規模店舗</text>
+        <text x="450" y="210" text-anchor="middle" fill="#5a5a7a" font-size="12">ジオラマ都市 + 機材 + 3Dプリンタ</text>
+        <text x="450" y="240" text-anchor="middle" fill="#ff6f00" font-size="11" font-weight="600">同じ資産を平日・休日で切替</text>
+
+        <!-- 左: 平日 -->
+        <rect x="20" y="50" width="240" height="280" rx="14" fill="#fff" filter="url(#shadow2)" stroke="#1a237e" stroke-width="2"/>
+        <rect x="20" y="50" width="240" height="44" rx="14" fill="url(#gradWeekday)"/>
+        <rect x="20" y="80" width="240" height="14" fill="url(#gradWeekday)"/>
+        <text x="140" y="78" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">📚 平日：探求学習スクール</text>
+
+        <text x="45" y="125" fill="#1a237e" font-size="11" font-weight="600">エンジニアリング・デザイン</text>
+        <text x="45" y="148" fill="#5a5a7a" font-size="10.5">🏗️ 3Dプリンタ・LEGOで街づくり</text>
+        <text x="45" y="168" fill="#5a5a7a" font-size="10.5">💡 電気配線・信号機の構築</text>
+        <text x="45" y="188" fill="#5a5a7a" font-size="10.5">🎨 オリジナルボディ制作</text>
+
+        <text x="45" y="218" fill="#1a237e" font-size="11" font-weight="600">論理的思考・解析</text>
+        <text x="45" y="241" fill="#5a5a7a" font-size="10.5">🔍 故障解析（なぜ動かない？）</text>
+        <text x="45" y="261" fill="#5a5a7a" font-size="10.5">🏎️ フリー走行・操作練習</text>
+        <text x="45" y="281" fill="#5a5a7a" font-size="10.5">📝 宿題タイム</text>
+
+        <rect x="40" y="300" width="200" height="22" rx="6" fill="#e8eaf6"/>
+        <text x="140" y="315" text-anchor="middle" fill="#1a237e" font-size="10" font-weight="600">💰 月謝制（ストック型収益）</text>
+
+        <!-- 右: 休日 -->
+        <rect x="640" y="50" width="240" height="280" rx="14" fill="#fff" filter="url(#shadow2)" stroke="#ff6f00" stroke-width="2"/>
+        <rect x="640" y="50" width="240" height="44" rx="14" fill="url(#gradWeekend)"/>
+        <rect x="640" y="80" width="240" height="14" fill="url(#gradWeekend)"/>
+        <text x="760" y="78" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">🎮 休日：アミューズメント</text>
+
+        <text x="665" y="125" fill="#ff6f00" font-size="11" font-weight="600">体験・エンターテインメント</text>
+        <text x="665" y="148" fill="#5a5a7a" font-size="10.5">🏙️ ジオラマ都市フリー走行</text>
+        <text x="665" y="168" fill="#5a5a7a" font-size="10.5">🏁 エリア限定レース</text>
+        <text x="665" y="188" fill="#5a5a7a" font-size="10.5">🪪 免許皆伝ライセンス制度</text>
+        <text x="665" y="218" fill="#ff6f00" font-size="11" font-weight="600">ゲーミフィケーション</text>
+        <text x="665" y="241" fill="#5a5a7a" font-size="10.5">🚚 ミッション達成型ゲーム</text>
+        <text x="665" y="261" fill="#5a5a7a" font-size="10.5">🏆 リワードで強化パーツ獲得</text>
+        <text x="665" y="281" fill="#5a5a7a" font-size="10.5">🅿️ 縦列駐車・車庫入れ検定</text>
+
+        <rect x="660" y="300" width="200" height="22" rx="6" fill="#fff3e0"/>
+        <text x="760" y="315" text-anchor="middle" fill="#ff6f00" font-size="10" font-weight="600">💰 時間課金（30分800円〜）</text>
+
+        <!-- 矢印 -->
+        <path d="M265 190 L305 190" stroke="#1a237e" stroke-width="2.5" fill="none" marker-end="url(#arrowBlue)"/>
+        <path d="M595 190 L635 190" stroke="#ff6f00" stroke-width="2.5" fill="none" marker-end="url(#arrowOr)"/>
+        <defs>
+          <marker id="arrowBlue" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+            <path d="M0,0 L10,4 L0,8" fill="#1a237e"/>
+          </marker>
+          <marker id="arrowOr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+            <path d="M0,0 L10,4 L0,8" fill="#ff6f00"/>
+          </marker>
+        </defs>
+
+        <!-- 下: 送客 -->
+        <path d="M760 335 Q760 365 450 365 Q140 365 140 335" stroke="#2e7d32" stroke-width="2" stroke-dasharray="6,3" fill="none" marker-end="url(#arrowG)"/>
+        <text x="450" y="360" text-anchor="middle" fill="#2e7d32" font-size="10.5" font-weight="600">休日体験 → 平日スクールへ送客</text>
+        <defs>
+          <marker id="arrowG" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+            <path d="M0,0 L10,4 L0,8" fill="#2e7d32"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <!-- 3つの価値 -->
+    <h3 style="text-align:center;font-size:1.2rem;font-weight:700;color:var(--primary);margin-bottom:1.5rem" class="fade-in">提供する3つの価値</h3>
+    <div class="grid-3 fade-in">
+      <div class="card" style="border-top:3px solid var(--primary)">
+        <div class="card-title">
+          <div class="card-icon" style="background:#e8eaf6;color:#1a237e">🧠</div>
+          遊びが「思考」に変わる
+        </div>
+        <p style="font-size:0.88rem;color:var(--text-light)">
+          カメラ越しの不便な視界で操作。実車の運転感覚に近い体験を通じ、日常に隠された工夫への気づきや応用力を養う。
+        </p>
+        <div style="margin-top:0.8rem"><span class="tag tag-primary">不便益の活用</span></div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--accent)">
+        <div class="card-title">
+          <div class="card-icon" style="background:#fff3e0;color:#ff6f00">🔧</div>
+          失敗大歓迎！壊して学ぶ
+        </div>
+        <p style="font-size:0.88rem;color:var(--text-light)">
+          故障を「中身を知るチャンス」と定義。分解して原因を探るプロセスで、「消費する側」から「修理・創造する側」へ。
+        </p>
+        <div style="margin-top:0.8rem"><span class="tag tag-accent">ハッカー思考</span></div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--success)">
+        <div class="card-title">
+          <div class="card-icon" style="background:#e8f5e9;color:#2e7d32">🏠</div>
+          安全な避難所
+        </div>
+        <p style="font-size:0.88rem;color:var(--text-light)">
+          酷暑・寒波に対応した屋内シェルター。子供が着座して集中するため怪我のリスクが低く、保護者は安心して休息可能。
+        </p>
+        <div style="margin-top:0.8rem"><span class="tag tag-success">全天候型</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 3. ビジネスモデル ===== -->
+<section id="business" class="section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-number">3</div>
+      <h2 class="section-title">ビジネスモデルと持続可能性</h2>
+      <p class="section-desc">3つの収益の柱で安定成長を実現</p>
+    </div>
+
+    <!-- 収益構造図解 -->
+    <div class="diagram-wrapper fade-in">
+      <div class="diagram-title">💰 3つの収益の柱と成長構造</div>
+      <svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" style="font-family:'Noto Sans JP',sans-serif">
+        <defs>
+          <filter id="shadow3" x="-5%" y="-5%" width="110%" height="115%">
+            <feDropShadow dx="0" dy="3" stdDeviation="5" flood-opacity="0.1"/>
+          </filter>
+        </defs>
+
+        <!-- 柱1: スクール -->
+        <rect x="30" y="30" width="260" height="250" rx="14" fill="#fff" filter="url(#shadow3)" stroke="#1a237e" stroke-width="2"/>
+        <rect x="30" y="30" width="260" height="40" rx="14" fill="#1a237e"/>
+        <rect x="30" y="56" width="260" height="14" fill="#1a237e"/>
+        <text x="160" y="56" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">📚 ① スクール事業（平日）</text>
+        <text x="160" y="100" text-anchor="middle" fill="#1a237e" font-size="22" font-weight="900">月謝制</text>
+        <text x="160" y="125" text-anchor="middle" fill="#5a5a7a" font-size="11">ストック型収益 = 安定基盤</text>
+        <line x1="70" y1="140" x2="250" y2="140" stroke="#e8e8f0" stroke-width="1"/>
+        <text x="55" y="165" fill="#5a5a7a" font-size="10.5">👦 会員数: 22名 → 38名 → 40名</text>
+        <text x="55" y="188" fill="#5a5a7a" font-size="10.5">💴 単価: ¥6,000 → ¥8,000 → ¥12,000</text>
+        <text x="55" y="211" fill="#5a5a7a" font-size="10.5">📈 売上: 158万 → 369万 → 576万</text>
+        <rect x="55" y="230" width="210" height="30" rx="8" fill="#e8eaf6"/>
+        <text x="160" y="250" text-anchor="middle" fill="#1a237e" font-size="10.5" font-weight="600">🔒 毎月の固定費をカバー</text>
+
+        <!-- 柱2: エンタメ -->
+        <rect x="320" y="30" width="260" height="250" rx="14" fill="#fff" filter="url(#shadow3)" stroke="#ff6f00" stroke-width="2"/>
+        <rect x="320" y="30" width="260" height="40" rx="14" fill="#ff6f00"/>
+        <rect x="320" y="56" width="260" height="14" fill="#ff6f00"/>
+        <text x="450" y="56" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">🎮 ② エンタメ事業（休日）</text>
+        <text x="450" y="100" text-anchor="middle" fill="#ff6f00" font-size="22" font-weight="900">時間課金</text>
+        <text x="450" y="125" text-anchor="middle" fill="#5a5a7a" font-size="11">新規顧客の入口 → スクール送客</text>
+        <line x1="360" y1="140" x2="540" y2="140" stroke="#e8e8f0" stroke-width="1"/>
+        <text x="345" y="165" fill="#5a5a7a" font-size="10.5">⏱️ 30分 800円〜</text>
+        <text x="345" y="188" fill="#5a5a7a" font-size="10.5">👥 月間約195名（1日平均24名）</text>
+        <text x="345" y="211" fill="#5a5a7a" font-size="10.5">📈 売上: 201万 → 230万 → 350万</text>
+        <rect x="345" y="230" width="210" height="30" rx="8" fill="#fff3e0"/>
+        <text x="450" y="250" text-anchor="middle" fill="#ff6f00" font-size="10.5" font-weight="600">🎁 パーツはリワード（非物販）</text>
+
+        <!-- 柱3: 広告 -->
+        <rect x="610" y="30" width="260" height="250" rx="14" fill="#fff" filter="url(#shadow3)" stroke="#2e7d32" stroke-width="2"/>
+        <rect x="610" y="30" width="260" height="40" rx="14" fill="#2e7d32"/>
+        <rect x="610" y="56" width="260" height="14" fill="#2e7d32"/>
+        <text x="740" y="56" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">📢 ③ 広告・協業事業</text>
+        <text x="740" y="100" text-anchor="middle" fill="#2e7d32" font-size="22" font-weight="900">広告掲載費</text>
+        <text x="740" y="125" text-anchor="middle" fill="#5a5a7a" font-size="11">原価ゼロの高利益事業</text>
+        <line x1="650" y1="140" x2="830" y2="140" stroke="#e8e8f0" stroke-width="1"/>
+        <text x="635" y="165" fill="#5a5a7a" font-size="10.5">🏢 月額¥10,000/社</text>
+        <text x="635" y="188" fill="#5a5a7a" font-size="10.5">📊 0社 → 5社 → 20社</text>
+        <text x="635" y="211" fill="#5a5a7a" font-size="10.5">📈 売上: 0万 → 60万 → 240万</text>
+        <rect x="635" y="230" width="210" height="30" rx="8" fill="#e8f5e9"/>
+        <text x="740" y="250" text-anchor="middle" fill="#2e7d32" font-size="10.5" font-weight="600">🚀 3期目の利益率を大幅押上</text>
+
+        <!-- 下部: コスト構造 -->
+        <rect x="130" y="310" width="640" height="90" rx="14" fill="#fff" filter="url(#shadow3)" stroke="#e8e8f0" stroke-width="1.5"/>
+        <text x="450" y="340" text-anchor="middle" fill="#1a237e" font-size="13" font-weight="700">⚙️ コスト構造の特徴</text>
+        <text x="250" y="370" text-anchor="middle" fill="#5a5a7a" font-size="11.5">🏪 低固定費運営（7坪 / 月6.5万）</text>
+        <text x="250" y="390" text-anchor="middle" fill="#999" font-size="10">→ 損益分岐点が低い</text>
+        <text x="650" y="370" text-anchor="middle" fill="#5a5a7a" font-size="11.5">🔧 故障パーツ＝教材に再利用</text>
+        <text x="650" y="390" text-anchor="middle" fill="#999" font-size="10">→ 変動費を学習価値に転換</text>
+
+        <!-- 矢印: 柱→コスト -->
+        <path d="M160 285 L250 305" stroke="#1a237e" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
+        <path d="M450 285 L450 305" stroke="#ff6f00" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
+        <path d="M740 285 L650 305" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
+      </svg>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== 4. 収支計画 ===== -->
+<section id="finance" class="section" style="background:linear-gradient(180deg, #f0f1ff 0%, var(--bg) 100%)">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-number">4</div>
+      <h2 class="section-title">収支計画（数値計画詳細）</h2>
+      <p class="section-desc">第3期は広告事業の拡大により、売上1,000万円超えを目指すロードマップ</p>
+    </div>
+
+    <!-- KPI -->
+    <div class="kpi-grid fade-in">
+      <div class="kpi-card">
+        <div class="kpi-value">360万</div>
+        <div class="kpi-label">第1期 売上</div>
+        <div class="kpi-change kpi-up">創業期</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value">660万</div>
+        <div class="kpi-label">第2期 売上</div>
+        <div class="kpi-change kpi-up">▲ +83%</div>
+      </div>
+      <div class="kpi-card kpi-accent">
+        <div class="kpi-value">1,166万</div>
+        <div class="kpi-label">第3期 売上</div>
+        <div class="kpi-change kpi-up">▲ +77%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value">798万</div>
+        <div class="kpi-label">第3期 営業利益</div>
+        <div class="kpi-change kpi-up">利益率 68%</div>
+      </div>
+    </div>
+
+    <!-- グラフ -->
+    <div class="grid-2 fade-in">
+      <div class="chart-card">
+        <h4 style="font-size:1rem;font-weight:700;color:var(--primary);margin-bottom:1rem">📊 売上構成の推移（千円）</h4>
+        <canvas id="revenueChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h4 style="font-size:1rem;font-weight:700;color:var(--primary);margin-bottom:1rem">📈 営業利益と利益率</h4>
+        <canvas id="profitChart"></canvas>
+      </div>
+    </div>
+
+    <!-- 詳細テーブル -->
+    <div style="margin-top:2rem" class="fade-in">
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>項目</th>
+              <th>第1期（創業期）</th>
+              <th>第2期（成長期）</th>
+              <th>第3期（安定・拡張期）</th>
+              <th>算出根拠・KPI</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight-row">
+              <td><strong>売上高 合計</strong></td>
+              <td><strong>3,600千円</strong></td>
+              <td><strong>6,600千円</strong></td>
+              <td><strong>11,660千円</strong></td>
+              <td>広告事業の伸長により3期目が飛躍</td>
+            </tr>
+            <tr>
+              <td>① スクール売上</td>
+              <td>1,584千円</td>
+              <td>3,696千円</td>
+              <td>5,760千円</td>
+              <td>1期:22名(¥6k) → 2期:38名(¥8k) → 3期:40名(¥12k)</td>
+            </tr>
+            <tr>
+              <td>② エンタメ売上</td>
+              <td>2,016千円</td>
+              <td>2,304千円</td>
+              <td>3,500千円</td>
+              <td>客単価¥1,500 × 月間約195名</td>
+            </tr>
+            <tr>
+              <td>③ 広告事業</td>
+              <td>0千円</td>
+              <td>600千円</td>
+              <td>2,400千円</td>
+              <td>月額¥10,000/社 × 0→5→20社</td>
+            </tr>
+            <tr class="highlight-row">
+              <td><strong>経費合計</strong></td>
+              <td><strong>2,340千円</strong></td>
+              <td><strong>2,760千円</strong></td>
+              <td><strong>3,680千円</strong></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>人件費</td>
+              <td>960千円</td>
+              <td>980千円</td>
+              <td>1,600千円</td>
+              <td>1-2期:代表+アルバイト / 3期:スタッフ増員</td>
+            </tr>
+            <tr>
+              <td>家賃</td>
+              <td>780千円</td>
+              <td>780千円</td>
+              <td>780千円</td>
+              <td>7坪 月6.5万円</td>
+            </tr>
+            <tr>
+              <td>その他経費</td>
+              <td>600千円</td>
+              <td>1,000千円</td>
+              <td>1,300千円</td>
+              <td>光熱費・通信費・広告宣伝費・消耗品費等</td>
+            </tr>
+            <tr class="highlight-row" style="color:var(--success)">
+              <td><strong>営業利益</strong></td>
+              <td><strong>1,260千円</strong></td>
+              <td><strong>3,840千円</strong></td>
+              <td><strong>7,980千円</strong></td>
+              <td><strong>利益率: 35% → 58% → 68%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 投資計画 -->
+    <div class="grid-2 fade-in" style="margin-top:1.5rem">
+      <div class="card" style="border-left:4px solid var(--primary)">
+        <div class="card-title">
+          <div class="card-icon" style="background:#e8eaf6;color:#1a237e">🏗️</div>
+          初期投資（機材・設備）
+        </div>
+        <p style="font-size:0.88rem;color:var(--text-light)">
+          省スペース（2畳〜7坪）でのスモールスタート。ラジコン・カメラ機材・3Dプリンタ・ジオラマ資材へ集中投資。
+        </p>
+      </div>
+      <div class="card" style="border-left:4px solid var(--accent)">
+        <div class="card-title">
+          <div class="card-icon" style="background:#fff3e0;color:#ff6f00">🔧</div>
+          変動費（維持・修繕）
+        </div>
+        <p style="font-size:0.88rem;color:var(--text-light)">
+          パーツ故障を「修理体験イベント」で収益化し、コストを教育価値に転換。配布用パーツは広告宣伝費として処理。
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== 5. マーケットと競争優位性 ===== -->
+<section id="market" class="section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-number">5</div>
+      <h2 class="section-title">マーケットと競争優位性</h2>
+      <p class="section-desc">「なぜ今なのか？」2つの巨大トレンドの衝突が生む必然のブルーオーシャン</p>
+    </div>
+
+    <!-- ===== 5.1 マクロ環境分析 ===== -->
+    <h3 style="text-align:center;font-size:1.2rem;font-weight:700;color:var(--primary);margin-bottom:0.5rem" class="fade-in">5.1 マクロ環境分析</h3>
+    <p style="text-align:center;font-size:0.9rem;color:var(--text-light);margin-bottom:2rem" class="fade-in">不可逆的な「気候変動」と「教育変革」が交差する地点に生まれたブルーオーシャン</p>
+
+    <!-- 2つのトレンド衝突図解 -->
+    <div class="diagram-wrapper fade-in">
+      <div class="diagram-title">🌍 2つの巨大トレンドの衝突 → ブルーオーシャンの誕生</div>
+      <svg viewBox="0 0 900 480" xmlns="http://www.w3.org/2000/svg" style="font-family:'Noto Sans JP',sans-serif">
+        <defs>
+          <filter id="shadowMacro" x="-5%" y="-5%" width="110%" height="115%">
+            <feDropShadow dx="0" dy="3" stdDeviation="5" flood-opacity="0.1"/>
+          </filter>
+          <linearGradient id="gradHeat" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#ff5722;stop-opacity:1"/>
+            <stop offset="100%" style="stop-color:#e64a19;stop-opacity:1"/>
+          </linearGradient>
+          <linearGradient id="gradEdu" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#1565c0;stop-opacity:1"/>
+            <stop offset="100%" style="stop-color:#0d47a1;stop-opacity:1"/>
+          </linearGradient>
+          <radialGradient id="glowCenter" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" style="stop-color:#ff6f00;stop-opacity:0.2"/>
+            <stop offset="100%" style="stop-color:#ff6f00;stop-opacity:0"/>
+          </radialGradient>
+        </defs>
+
+        <!-- 背景 -->
+        <rect x="0" y="0" width="900" height="480" rx="16" fill="#f8f9fc"/>
+
+        <!-- トレンド1: 気候変動（左） -->
+        <rect x="30" y="30" width="340" height="280" rx="16" fill="#fff" filter="url(#shadowMacro)" stroke="#ff5722" stroke-width="2"/>
+        <rect x="30" y="30" width="340" height="48" rx="16" fill="url(#gradHeat)"/>
+        <rect x="30" y="62" width="340" height="16" fill="url(#gradHeat)"/>
+        <text x="200" y="62" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">🌡️ トレンド①：気候変動（PUSH要因）</text>
+
+        <text x="55" y="110" fill="#c62828" font-size="12" font-weight="700">猛暑日の常態化</text>
+        <text x="55" y="132" fill="#5a5a7a" font-size="11">過去30年で猛暑日は <tspan fill="#c62828" font-weight="700">3.9倍</tspan> に増加</text>
+
+        <text x="55" y="165" fill="#c62828" font-size="12" font-weight="700">子どもの体感温度</text>
+        <text x="55" y="187" fill="#5a5a7a" font-size="11">地表近くは大人より <tspan fill="#c62828" font-weight="700">+7.1℃</tspan></text>
+        <text x="55" y="207" fill="#5a5a7a" font-size="10.5">気温31℃でも子どもは38.2℃の世界</text>
+
+        <rect x="55" y="230" width="290" height="60" rx="10" fill="#fbe9e7"/>
+        <text x="200" y="253" text-anchor="middle" fill="#c62828" font-size="11" font-weight="700">⚠️ 事業へのインパクト</text>
+        <text x="200" y="275" text-anchor="middle" fill="#c62828" font-size="10.5">夏の外遊びは物理的に不可能 →</text>
+        <text x="200" y="292" text-anchor="middle" fill="#c62828" font-size="10.5">「気候シェルター」への需要が爆発</text>
+
+        <!-- トレンド2: 教育変革（右） -->
+        <rect x="530" y="30" width="340" height="280" rx="16" fill="#fff" filter="url(#shadowMacro)" stroke="#1565c0" stroke-width="2"/>
+        <rect x="530" y="30" width="340" height="48" rx="16" fill="url(#gradEdu)"/>
+        <rect x="530" y="62" width="340" height="16" fill="url(#gradEdu)"/>
+        <text x="700" y="62" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">📚 トレンド②：教育変革（PULL要因）</text>
+
+        <text x="555" y="110" fill="#0d47a1" font-size="12" font-weight="700">「情報I」必修化</text>
+        <text x="555" y="132" fill="#5a5a7a" font-size="11">2025年より大学入試に「情報」導入</text>
+
+        <text x="555" y="165" fill="#0d47a1" font-size="12" font-weight="700">プログラミング教育市場</text>
+        <text x="555" y="187" fill="#5a5a7a" font-size="11">2030年に <tspan fill="#0d47a1" font-weight="700">1,000億円</tspan> 規模へ拡大</text>
+        <text x="555" y="207" fill="#5a5a7a" font-size="10.5">「趣味」から「必須投資」へ質的転換</text>
+
+        <rect x="555" y="230" width="290" height="60" rx="10" fill="#e3f2fd"/>
+        <text x="700" y="253" text-anchor="middle" fill="#0d47a1" font-size="11" font-weight="700">📈 事業へのインパクト</text>
+        <text x="700" y="275" text-anchor="middle" fill="#0d47a1" font-size="10.5">教育費の固定費化 →</text>
+        <text x="700" y="292" text-anchor="middle" fill="#0d47a1" font-size="10.5">STEAM教育へ「必須投資」として流入</text>
+
+        <!-- 中央の衝突ポイント -->
+        <circle cx="450" cy="190" r="50" fill="url(#glowCenter)"/>
+
+        <!-- 矢印: 左→中央 -->
+        <path d="M375 190 L410 190" stroke="#ff5722" stroke-width="3" fill="none" marker-end="url(#arrowRed)"/>
+        <!-- 矢印: 右→中央 -->
+        <path d="M525 190 L490 190" stroke="#1565c0" stroke-width="3" fill="none" marker-end="url(#arrowBlu)"/>
+        <defs>
+          <marker id="arrowRed" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+            <path d="M0,0 L10,4 L0,8" fill="#ff5722"/>
+          </marker>
+          <marker id="arrowBlu" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+            <path d="M0,0 L10,4 L0,8" fill="#1565c0"/>
+          </marker>
+        </defs>
+
+        <!-- 中央: 交差点 -->
+        <circle cx="450" cy="190" r="30" fill="#fff" stroke="#ff6f00" stroke-width="3" filter="url(#shadowMacro)"/>
+        <text x="450" y="186" text-anchor="middle" fill="#ff6f00" font-size="16">⚡</text>
+        <text x="450" y="202" text-anchor="middle" fill="#ff6f00" font-size="8" font-weight="700">衝突</text>
+
+        <!-- 下: 結論 -->
+        <path d="M450 225 L450 340" stroke="#ff6f00" stroke-width="2.5" fill="none" marker-end="url(#arrowOrangeDown)"/>
+        <defs>
+          <marker id="arrowOrangeDown" markerWidth="10" markerHeight="8" refX="5" refY="8" orient="auto">
+            <path d="M0,0 L5,8 L10,0" fill="#ff6f00"/>
+          </marker>
+        </defs>
+
+        <rect x="200" y="350" width="500" height="110" rx="16" fill="#fff" filter="url(#shadowMacro)" stroke="#ff6f00" stroke-width="3"/>
+        <text x="450" y="385" text-anchor="middle" fill="#ff6f00" font-size="16" font-weight="900">★ ふじた電気探求所</text>
+        <text x="450" y="412" text-anchor="middle" fill="#1a237e" font-size="12" font-weight="600">安全な屋内環境（気候シェルター）×  実践的STEAM教育（物理モノづくり）</text>
+        <rect x="300" y="425" width="300" height="26" rx="13" fill="#ff6f00"/>
+        <text x="450" y="443" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">2つのトレンドが交差するBlue Ocean</text>
+      </svg>
+    </div>
+
+    <!-- マクロトレンド詳細テーブル -->
+    <div class="table-wrapper fade-in" style="margin-bottom:3rem">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:18%">トレンド</th>
+            <th style="width:42%">データによる裏付け</th>
+            <th style="width:40%">事業へのインパクト</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span style="color:#c62828;font-weight:700">🌡️ 1. 気候変動</span><br>
+              <span class="tag" style="background:#fbe9e7;color:#c62828">PUSH要因</span>
+            </td>
+            <td>
+              <strong>猛暑日の常態化:</strong> 過去30年で猛暑日は<strong style="color:#c62828">3.9倍</strong>に増加。<br>
+              <strong>子ども体感温度:</strong> 地表近くは大人より<strong style="color:#c62828">+7.1℃</strong>（気温31℃でも子どもは38.2℃）
+            </td>
+            <td>
+              <strong style="color:#c62828">【強制的な屋内退避】</strong><br>
+              夏の「外遊び」は物理的に不可能に。安全な「気候シェルター（屋内インフラ）」への需要が爆発的に増加。
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color:#0d47a1;font-weight:700">📚 2. 教育変革</span><br>
+              <span class="tag" style="background:#e3f2fd;color:#0d47a1">PULL要因</span>
+            </td>
+            <td>
+              <strong>情報I 必修化:</strong> 2025年より大学入試に「情報」導入。<br>
+              <strong>市場拡大:</strong> プログラミング教育市場は2030年に<strong style="color:#0d47a1">1,000億円</strong>規模へ。
+            </td>
+            <td>
+              <strong style="color:#0d47a1">【教育費の固定費化】</strong><br>
+              プログラミングは「趣味の習い事」から、進学・キャリアのための「必須投資」へと質的転換。
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ===== 5.2 顧客インサイト ===== -->
+    <h3 style="text-align:center;font-size:1.2rem;font-weight:700;color:var(--primary);margin-bottom:0.5rem" class="fade-in">5.2 顧客インサイト</h3>
+    <p style="text-align:center;font-size:0.9rem;color:var(--text-light);margin-bottom:2rem" class="fade-in">保護者を襲う「ダブル不安」を同時に解決する唯一のソリューション</p>
+
+    <!-- ダブル不安 → 解決 図解 -->
+    <div class="diagram-wrapper fade-in">
+      <div class="diagram-title">😰 保護者の「ダブル不安」と解決メカニズム</div>
+      <svg viewBox="0 0 900 440" xmlns="http://www.w3.org/2000/svg" style="font-family:'Noto Sans JP',sans-serif">
+        <defs>
+          <filter id="shadowInsight" x="-5%" y="-5%" width="110%" height="115%">
+            <feDropShadow dx="0" dy="3" stdDeviation="5" flood-opacity="0.1"/>
+          </filter>
+        </defs>
+
+        <rect x="0" y="0" width="900" height="440" rx="16" fill="#f8f9fc"/>
+
+        <!-- 不安1: 熱中症 -->
+        <rect x="30" y="30" width="370" height="150" rx="14" fill="#fff" filter="url(#shadowInsight)" stroke="#c62828" stroke-width="2"/>
+        <rect x="30" y="30" width="370" height="40" rx="14" fill="#c62828"/>
+        <rect x="30" y="56" width="370" height="14" fill="#c62828"/>
+        <text x="215" y="57" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">😱 不安①：熱中症への恐怖（生命維持）</text>
+        <text x="215" y="100" text-anchor="middle" fill="#c62828" font-size="12" font-weight="600">「外で遊ばせたいが、</text>
+        <text x="215" y="122" text-anchor="middle" fill="#c62828" font-size="12" font-weight="600">命にかかわる暑さで出せない」</text>
+        <text x="215" y="150" text-anchor="middle" fill="#5a5a7a" font-size="10">→ 子どもの活動機会が強制的に奪われる</text>
+        <text x="215" y="168" text-anchor="middle" fill="#5a5a7a" font-size="10">→ しかし屋内の選択肢は「ゲーム」か「動画」</text>
+
+        <!-- 不安2: 罪悪感 -->
+        <rect x="500" y="30" width="370" height="150" rx="14" fill="#fff" filter="url(#shadowInsight)" stroke="#6a1b9a" stroke-width="2"/>
+        <rect x="500" y="30" width="370" height="40" rx="14" fill="#6a1b9a"/>
+        <rect x="500" y="56" width="370" height="14" fill="#6a1b9a"/>
+        <text x="685" y="57" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">😞 不安②：受動的消費への罪悪感（教育機会）</text>
+        <text x="685" y="100" text-anchor="middle" fill="#6a1b9a" font-size="12" font-weight="600">「涼しい屋内に閉じ込めると、</text>
+        <text x="685" y="122" text-anchor="middle" fill="#6a1b9a" font-size="12" font-weight="600">YouTubeやゲームばかりで無駄な時間に…」</text>
+        <text x="685" y="150" text-anchor="middle" fill="#5a5a7a" font-size="10">→ 安全を優先すると教育機会を失う</text>
+        <text x="685" y="168" text-anchor="middle" fill="#5a5a7a" font-size="10">→ 「休ませたいが罪悪感がある」ジレンマ</text>
+
+        <!-- VS / ジレンマ表示 -->
+        <circle cx="450" cy="105" r="24" fill="#fff" stroke="#e0e0e0" stroke-width="2" filter="url(#shadowInsight)"/>
+        <text x="450" y="112" text-anchor="middle" fill="#999" font-size="12" font-weight="700">VS</text>
+
+        <!-- 矢印: 不安 → 解決策 -->
+        <path d="M215 185 L215 240 Q215 260 250 260 L400 260" stroke="#c62828" stroke-width="2" stroke-dasharray="6,3" fill="none"/>
+        <path d="M685 185 L685 240 Q685 260 650 260 L500 260" stroke="#6a1b9a" stroke-width="2" stroke-dasharray="6,3" fill="none"/>
+
+        <!-- 解決策: Educational Alibi -->
+        <rect x="150" y="230" width="600" height="190" rx="16" fill="#fff" filter="url(#shadowInsight)" stroke="#ff6f00" stroke-width="3"/>
+        <rect x="300" y="218" width="300" height="30" rx="15" fill="#ff6f00"/>
+        <text x="450" y="239" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">💡 解決策：Educational Alibi（教育的免罪符）</text>
+
+        <text x="450" y="280" text-anchor="middle" fill="#1a237e" font-size="14" font-weight="800">⚡ ふじた電気探求所</text>
+
+        <!-- 2つの提供価値 -->
+        <rect x="180" y="300" width="250" height="70" rx="10" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1"/>
+        <text x="305" y="322" text-anchor="middle" fill="#2e7d32" font-size="11" font-weight="700">✅ 安心感（シェルター機能）</text>
+        <text x="305" y="342" text-anchor="middle" fill="#2e7d32" font-size="10">涼しく安全な屋内環境</text>
+        <text x="305" y="360" text-anchor="middle" fill="#2e7d32" font-size="10">着座型で怪我リスク極小</text>
+
+        <rect x="470" y="300" width="250" height="70" rx="10" fill="#e8eaf6" stroke="#1a237e" stroke-width="1"/>
+        <text x="595" y="322" text-anchor="middle" fill="#1a237e" font-size="11" font-weight="700">✅ 満足感（教育投資）</text>
+        <text x="595" y="342" text-anchor="middle" fill="#1a237e" font-size="10">高度なSTEAM体験を提供</text>
+        <text x="595" y="360" text-anchor="middle" fill="#1a237e" font-size="10">「将来に役立つ投資」の実感</text>
+
+        <text x="450" y="405" text-anchor="middle" fill="#ff6f00" font-size="12" font-weight="700">2つの不安を「同時に解決」する唯一のソリューション</text>
+      </svg>
+    </div>
+
+    <!-- ターゲット層 -->
+    <h3 style="text-align:center;font-size:1.05rem;font-weight:700;color:var(--primary);margin-bottom:1.5rem" class="fade-in">🎯 ターゲット層とアプローチ</h3>
+    <div class="grid-3 fade-in" style="margin-bottom:3rem">
+      <div class="card" style="text-align:center;border-top:3px solid #42a5f5">
+        <div style="font-size:2.5rem;margin-bottom:0.5rem">👦</div>
+        <h4 style="color:var(--primary);margin-bottom:0.5rem">お子様</h4>
+        <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:0.8rem">
+          「ゲームよりも実物がいい」<br>「自分だけのマシンを作りたい」
+        </p>
+        <span class="tag tag-info">FPV操作体験</span>
+        <span class="tag tag-primary">カスタマイズ</span>
+      </div>
+      <div class="card" style="text-align:center;border-top:3px solid #ab47bc">
+        <div style="font-size:2.5rem;margin-bottom:0.5rem">👩</div>
+        <h4 style="color:var(--primary);margin-bottom:0.5rem">親御様</h4>
+        <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:0.8rem">
+          「動画ばかり見せず現実体験を」<br>「休みたいが罪悪感がある」
+        </p>
+        <span class="tag tag-accent">思考力カリキュラム</span>
+        <span class="tag tag-success">安心休息</span>
+      </div>
+      <div class="card" style="text-align:center;border-top:3px solid #66bb6a">
+        <div style="font-size:2.5rem;margin-bottom:0.5rem">🏢</div>
+        <h4 style="color:var(--primary);margin-bottom:0.5rem">企業</h4>
+        <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:0.8rem">
+          「子供向けにPRしたい」<br>「空きスペースを有効活用」
+        </p>
+        <span class="tag tag-primary">ジオラマ内広告</span>
+        <span class="tag tag-accent">省スペース出店</span>
+      </div>
+    </div>
+
+    <!-- ===== 5.3 公教育の限界とブルーオーシャン ===== -->
+    <h3 style="text-align:center;font-size:1.2rem;font-weight:700;color:var(--primary);margin-bottom:0.5rem" class="fade-in">5.3 公教育の限界とブルーオーシャン</h3>
+    <p style="text-align:center;font-size:0.9rem;color:var(--text-light);margin-bottom:2rem" class="fade-in">GIGAスクール構想の「欠落」が生む市場の空白</p>
+
+    <!-- 公教育の限界 図解 -->
+    <div class="diagram-wrapper fade-in">
+      <div class="diagram-title">🏫 GIGAスクール構想の「入力と出力」ギャップ</div>
+      <svg viewBox="0 0 900 360" xmlns="http://www.w3.org/2000/svg" style="font-family:'Noto Sans JP',sans-serif">
+        <defs>
+          <filter id="shadowGiga" x="-5%" y="-5%" width="110%" height="115%">
+            <feDropShadow dx="0" dy="3" stdDeviation="5" flood-opacity="0.1"/>
+          </filter>
+        </defs>
+
+        <rect x="0" y="0" width="900" height="360" rx="16" fill="#f8f9fc"/>
+
+        <!-- 左: 入力装置（実現済） -->
+        <rect x="40" y="30" width="240" height="200" rx="14" fill="#fff" filter="url(#shadowGiga)" stroke="#2e7d32" stroke-width="2"/>
+        <rect x="40" y="30" width="240" height="40" rx="14" fill="#2e7d32"/>
+        <rect x="40" y="56" width="240" height="14" fill="#2e7d32"/>
+        <text x="160" y="57" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">✅ 入力装置（実現済み）</text>
+        <text x="160" y="100" text-anchor="middle" fill="#2e7d32" font-size="28">💻</text>
+        <text x="160" y="135" text-anchor="middle" fill="#1a237e" font-size="13" font-weight="700">1人1台タブレット</text>
+        <text x="160" y="160" text-anchor="middle" fill="#5a5a7a" font-size="11">GIGAスクール構想で配備完了</text>
+        <text x="160" y="180" text-anchor="middle" fill="#5a5a7a" font-size="11">画面の中で情報を「入力」</text>
+        <rect x="70" y="198" width="180" height="22" rx="6" fill="#e8f5e9"/>
+        <text x="160" y="214" text-anchor="middle" fill="#2e7d32" font-size="10" font-weight="600">デジタル側は充足</text>
+
+        <!-- 中央: ギャップ -->
+        <path d="M285 130 L335 130" stroke="#c62828" stroke-width="3" stroke-dasharray="8,4" fill="none"/>
+        <text x="310" y="115" text-anchor="middle" fill="#c62828" font-size="24">⚠️</text>
+        <text x="310" y="155" text-anchor="middle" fill="#c62828" font-size="10" font-weight="700">GAP</text>
+
+        <!-- 中央: 出力装置（欠落） -->
+        <rect x="340" y="30" width="240" height="200" rx="14" fill="#fff" filter="url(#shadowGiga)" stroke="#c62828" stroke-width="2" stroke-dasharray="8,4"/>
+        <rect x="340" y="30" width="240" height="40" rx="14" fill="#c62828"/>
+        <rect x="340" y="56" width="240" height="14" fill="#c62828"/>
+        <text x="460" y="57" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">❌ 出力装置（欠落！）</text>
+        <text x="460" y="100" text-anchor="middle" fill="#c62828" font-size="28">🖨️ 🔧</text>
+        <text x="460" y="135" text-anchor="middle" fill="#c62828" font-size="13" font-weight="700">3Dプリンタ・工作機械</text>
+        <text x="460" y="160" text-anchor="middle" fill="#5a5a7a" font-size="11">物理的モノづくり環境が</text>
+        <text x="460" y="180" text-anchor="middle" fill="#5a5a7a" font-size="11">学校には圧倒的に不足</text>
+        <rect x="370" y="198" width="180" height="22" rx="6" fill="#fbe9e7"/>
+        <text x="460" y="214" text-anchor="middle" fill="#c62828" font-size="10" font-weight="600">フィジカル側が空白</text>
+
+        <!-- 右: ふじた電気探求所が埋める -->
+        <path d="M585 130 L630 130" stroke="#ff6f00" stroke-width="3" fill="none" marker-end="url(#arrowOrangeFill)"/>
+        <defs>
+          <marker id="arrowOrangeFill" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+            <path d="M0,0 L10,4 L0,8" fill="#ff6f00"/>
+          </marker>
+        </defs>
+
+        <rect x="635" y="30" width="240" height="200" rx="14" fill="#fff" filter="url(#shadowGiga)" stroke="#ff6f00" stroke-width="3"/>
+        <rect x="635" y="30" width="240" height="40" rx="14" fill="#ff6f00"/>
+        <rect x="635" y="56" width="240" height="14" fill="#ff6f00"/>
+        <text x="755" y="57" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">⚡ ふじた電気探求所が埋める</text>
+        <text x="755" y="100" text-anchor="middle" fill="#ff6f00" font-size="28">🏗️</text>
+        <text x="755" y="135" text-anchor="middle" fill="#1a237e" font-size="13" font-weight="700">デジタル × フィジカル</text>
+        <text x="755" y="160" text-anchor="middle" fill="#5a5a7a" font-size="11">ラジコン・3Dプリンタ・電気工作</text>
+        <text x="755" y="180" text-anchor="middle" fill="#5a5a7a" font-size="11">「手触り」のあるSTEAM教育</text>
+        <rect x="665" y="198" width="180" height="22" rx="6" fill="#fff3e0"/>
+        <text x="755" y="214" text-anchor="middle" fill="#ff6f00" font-size="10" font-weight="600">大手も公教育も参入しにくい領域</text>
+
+        <!-- 下部: まとめ -->
+        <rect x="150" y="270" width="600" height="70" rx="14" fill="#fff" filter="url(#shadowGiga)" stroke="#1a237e" stroke-width="1.5"/>
+        <text x="450" y="298" text-anchor="middle" fill="#1a237e" font-size="13" font-weight="700">🔵 市場の空白（Opportunity Gap）</text>
+        <text x="450" y="322" text-anchor="middle" fill="#5a5a7a" font-size="11.5">画面の中だけの学習に飽きた子どもたちに、<tspan fill="#ff6f00" font-weight="700">「リアルな手触り（フィジカル）」</tspan>を提供する場所がない</text>
+      </svg>
+    </div>
+
+    <div class="grid-2 fade-in" style="margin-bottom:3rem">
+      <div class="card" style="border-left:4px solid #c62828">
+        <div class="card-title">
+          <div class="card-icon" style="background:#fbe9e7;color:#c62828">🏫</div>
+          公教育の限界（Opportunity Gap）
+        </div>
+        <p style="font-size:0.88rem;color:var(--text-light)">
+          タブレット（入力装置）はあっても、<strong>3Dプリンタや工作機械といった「物理的モノづくり環境（出力装置）」</strong>が圧倒的に不足。画面の中だけの学習では「リアルな手触り」が得られない。
+        </p>
+      </div>
+      <div class="card" style="border-left:4px solid var(--accent)">
+        <div class="card-title">
+          <div class="card-icon" style="background:#fff3e0;color:#ff6f00">🌊</div>
+          独自のブルーオーシャン
+        </div>
+        <p style="font-size:0.88rem;color:var(--text-light)">
+          この<strong>「デジタル × フィジカル」の領域</strong>こそが、大手資本も公教育も参入しにくい、本事業独自のブルーオーシャン。7坪のマイクロラボだからこそ機動的に占拠できる。
+        </p>
+      </div>
+    </div>
+
+    <!-- ===== 5.4 独自のポジショニング ===== -->
+    <h3 style="text-align:center;font-size:1.2rem;font-weight:700;color:var(--primary);margin-bottom:0.5rem" class="fade-in">5.4 独自のポジショニング</h3>
+    <p style="text-align:center;font-size:0.9rem;color:var(--text-light);margin-bottom:2rem" class="fade-in">主要3分野との徹底比較</p>
+
+    <!-- ポジショニングマップ -->
+    <div class="diagram-wrapper fade-in">
+      <div class="diagram-title">📍 ポジショニングマップ ー 競合4分野の中の「空白地帯」</div>
+      <svg viewBox="0 0 700 560" xmlns="http://www.w3.org/2000/svg" style="font-family:'Noto Sans JP',sans-serif">
+        <defs>
+          <filter id="shadow4" x="-5%" y="-5%" width="110%" height="115%">
+            <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.1"/>
+          </filter>
+          <radialGradient id="starGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" style="stop-color:#ff6f00;stop-opacity:0.15"/>
+            <stop offset="100%" style="stop-color:#ff6f00;stop-opacity:0"/>
+          </radialGradient>
+        </defs>
+
+        <!-- 背景グリッド -->
+        <rect x="50" y="30" width="600" height="480" rx="0" fill="#fafbff" stroke="#e0e0e0" stroke-width="1"/>
+
+        <!-- 軸 -->
+        <line x1="350" y1="30" x2="350" y2="510" stroke="#bbb" stroke-width="1.5" stroke-dasharray="4,4"/>
+        <line x1="50" y1="270" x2="650" y2="270" stroke="#bbb" stroke-width="1.5" stroke-dasharray="4,4"/>
+
+        <!-- 軸ラベル -->
+        <text x="350" y="20" text-anchor="middle" fill="#1a237e" font-size="12" font-weight="700">⬆ 定型・マニュアル</text>
+        <text x="350" y="540" text-anchor="middle" fill="#ff6f00" font-size="12" font-weight="700">⬇ 非定型・探索</text>
+        <text x="30" y="270" text-anchor="middle" fill="#999" font-size="11" font-weight="600" transform="rotate(-90,30,270)">画面・卓上</text>
+        <text x="680" y="270" text-anchor="middle" fill="#999" font-size="11" font-weight="600" transform="rotate(90,680,270)">空間・移動</text>
+
+        <!-- 左上: プログラミング教室 -->
+        <rect x="100" y="70" width="180" height="110" rx="12" fill="#fff" filter="url(#shadow4)" stroke="#7986cb" stroke-width="1.5"/>
+        <text x="190" y="100" text-anchor="middle" fill="#3949ab" font-size="13" font-weight="700">💻 プログラミング教室</text>
+        <text x="190" y="122" text-anchor="middle" fill="#5a5a7a" font-size="10">画面の中で</text>
+        <text x="190" y="140" text-anchor="middle" fill="#5a5a7a" font-size="10">正解コードを書く</text>
+        <text x="190" y="165" text-anchor="middle" fill="#999" font-size="9">定型 × 卓上</text>
+
+        <!-- 左下: ロボット教室 -->
+        <rect x="100" y="310" width="180" height="110" rx="12" fill="#fff" filter="url(#shadow4)" stroke="#7986cb" stroke-width="1.5"/>
+        <text x="190" y="340" text-anchor="middle" fill="#3949ab" font-size="13" font-weight="700">🤖 ロボット教室</text>
+        <text x="190" y="362" text-anchor="middle" fill="#5a5a7a" font-size="10">机の上で</text>
+        <text x="190" y="380" text-anchor="middle" fill="#5a5a7a" font-size="10">マニュアル通りに組む</text>
+        <text x="190" y="405" text-anchor="middle" fill="#999" font-size="9">定型 × 卓上</text>
+
+        <!-- 右上: ラジコンサーキット -->
+        <rect x="430" y="70" width="180" height="110" rx="12" fill="#fff" filter="url(#shadow4)" stroke="#7986cb" stroke-width="1.5"/>
+        <text x="520" y="100" text-anchor="middle" fill="#3949ab" font-size="13" font-weight="700">🏎️ ラジコンサーキット</text>
+        <text x="520" y="122" text-anchor="middle" fill="#5a5a7a" font-size="10">決まったコースを</text>
+        <text x="520" y="140" text-anchor="middle" fill="#5a5a7a" font-size="10">速く走る</text>
+        <text x="520" y="165" text-anchor="middle" fill="#999" font-size="9">定型 × 空間</text>
+
+        <!-- 右下: ふじた電気探求所 (★) -->
+        <circle cx="520" cy="400" r="80" fill="url(#starGlow)"/>
+        <rect x="430" y="320" width="200" height="160" rx="14" fill="#fff" filter="url(#shadow4)" stroke="#ff6f00" stroke-width="3"/>
+        <text x="530" y="355" text-anchor="middle" fill="#ff6f00" font-size="15" font-weight="900">★ ふじた電気探求所</text>
+        <text x="530" y="380" text-anchor="middle" fill="#1a237e" font-size="11" font-weight="600">3次元の迷宮を</text>
+        <text x="530" y="400" text-anchor="middle" fill="#1a237e" font-size="11" font-weight="600">泥臭く探索・修理する</text>
+        <text x="530" y="430" text-anchor="middle" fill="#ff6f00" font-size="10" font-weight="700">非定型 × 空間</text>
+        <rect x="460" y="445" width="140" height="24" rx="12" fill="#ff6f00"/>
+        <text x="530" y="462" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">🔵 Blue Ocean</text>
+      </svg>
+    </div>
+
+    <!-- 3つの勝ち筋 -->
+    <h3 style="text-align:center;font-size:1.15rem;font-weight:700;color:var(--primary);margin-bottom:1.5rem" class="fade-in">⚔️ 対ロボット教室：3つの勝ち筋</h3>
+    <div class="grid-3 fade-in" style="margin-bottom:2rem">
+      <div class="card" style="border-top:3px solid var(--accent)">
+        <div style="text-align:center;margin-bottom:0.5rem">
+          <span style="font-size:2rem">🎥</span>
+        </div>
+        <h4 style="text-align:center;color:var(--primary);font-size:0.95rem;margin-bottom:0.6rem">勝ち筋 ①<br>視点の革命</h4>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;font-size:0.8rem">
+          <div style="background:#f5f5f5;padding:0.5rem;border-radius:8px;text-align:center">
+            <div style="font-weight:600;color:#666;margin-bottom:0.2rem">ロボット教室</div>
+            <div style="color:var(--text-light)">神の視点で見下ろす</div>
+          </div>
+          <div style="background:var(--accent-soft);padding:0.5rem;border-radius:8px;text-align:center">
+            <div style="font-weight:600;color:var(--accent);margin-bottom:0.2rem">当所</div>
+            <div style="color:var(--text)">FPVで中に入り込む</div>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--accent)">
+        <div style="text-align:center;margin-bottom:0.5rem">
+          <span style="font-size:2rem">🔨</span>
+        </div>
+        <h4 style="text-align:center;color:var(--primary);font-size:0.95rem;margin-bottom:0.6rem">勝ち筋 ②<br>正解主義からの脱却</h4>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;font-size:0.8rem">
+          <div style="background:#f5f5f5;padding:0.5rem;border-radius:8px;text-align:center">
+            <div style="font-weight:600;color:#666;margin-bottom:0.2rem">ロボット教室</div>
+            <div style="color:var(--text-light)">マニュアル通りに組む</div>
+          </div>
+          <div style="background:var(--accent-soft);padding:0.5rem;border-radius:8px;text-align:center">
+            <div style="font-weight:600;color:var(--accent);margin-bottom:0.2rem">当所</div>
+            <div style="color:var(--text)">壊して直すハッカー思考</div>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--accent)">
+        <div style="text-align:center;margin-bottom:0.5rem">
+          <span style="font-size:2rem">♻️</span>
+        </div>
+        <h4 style="text-align:center;color:var(--primary);font-size:0.95rem;margin-bottom:0.6rem">勝ち筋 ③<br>シェアリング</h4>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;font-size:0.8rem">
+          <div style="background:#f5f5f5;padding:0.5rem;border-radius:8px;text-align:center">
+            <div style="font-weight:600;color:#666;margin-bottom:0.2rem">ロボット教室</div>
+            <div style="color:var(--text-light)">高額キット購入(3〜5万)</div>
+          </div>
+          <div style="background:var(--accent-soft);padding:0.5rem;border-radius:8px;text-align:center">
+            <div style="font-weight:600;color:var(--accent);margin-bottom:0.2rem">当所</div>
+            <div style="color:var(--text)">機材シェア+3Dプリント</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 比較テーブル -->
+    <div class="table-wrapper fade-in">
+      <table>
+        <thead>
+          <tr>
+            <th>比較項目</th>
+            <th class="compare-header-us">ふじた電気探求所</th>
+            <th>ロボット教室</th>
+            <th>プログラミング教室</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>月謝・費用</strong></td>
+            <td class="compare-highlight"><strong>月額8,000円</strong>（月4回）</td>
+            <td>月額1.0〜2万円 ＋キット代3〜6万円</td>
+            <td>月額1.0〜2.0万円 ＋入会金・教材費等</td>
+          </tr>
+          <tr>
+            <td><strong>扱う対象</strong></td>
+            <td class="compare-highlight">ラジコン・ロボットアーム・3Dプリンタ（没入感）</td>
+            <td>ブロック・キット（外から操作）</td>
+            <td>コード・画面（論理で動かす）</td>
+          </tr>
+          <tr>
+            <td><strong>教育の本質</strong></td>
+            <td class="compare-highlight"><strong>修理・発案（野性）</strong></td>
+            <td>組立・手順（規律）</td>
+            <td>論理・パズル（知能）</td>
+          </tr>
+          <tr>
+            <td><strong>空間・動き</strong></td>
+            <td class="compare-highlight"><strong>立体的・探索型</strong>（7坪を無限に冒険）</td>
+            <td>卓上・静止型</td>
+            <td>画面内・完結型</td>
+          </tr>
+          <tr>
+            <td><strong>初期コスト</strong></td>
+            <td class="compare-highlight"><strong>低</strong>（レンタル・手ぶらOK）</td>
+            <td>高（専用キット3〜5万円〜）</td>
+            <td>中（PC+ライセンス費）</td>
+          </tr>
+          <tr>
+            <td><strong>飽きやすさ</strong></td>
+            <td class="compare-highlight"><strong>低い</strong>（毎回変化・中毒性あり）</td>
+            <td>ある（完成後の満足）</td>
+            <td>ある（挫折しやすい）</td>
+          </tr>
+          <tr>
+            <td><strong>インクルーシブ</strong></td>
+            <td class="compare-highlight"><strong>◎ 誰でも対等</strong></td>
+            <td>○ マニュアル依存</td>
+            <td>△ 適性依存</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ステートメント -->
+    <div class="statement fade-in">
+      <p>
+        既存の教室は、「正解のある課題」を解くための場所でした。<br>
+        しかし、AI時代に必要なのは、正解のない荒野を進む力です。<br><br>
+        組み立てキット（ロボット教室）も、教科書（プログラミング）も要りません。<br>
+        ここにあるのは、「ラジコン」と「3Dプリンタ」、そして「電気の応用」だけ。<br><br>
+        <span class="highlight">マニュアルを捨てる。それが、ふじた電気探求所の教育です。</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 6. 社会的意義 ===== -->
+<section id="social" class="section" style="background:linear-gradient(180deg, #f0f1ff 0%, var(--bg) 100%)">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-number">6</div>
+      <h2 class="section-title">社会的意義と今後の展開</h2>
+      <p class="section-desc">交通安全・教育・地域の3領域でソーシャルインパクトを創出</p>
+    </div>
+
+    <!-- ソーシャルインパクト -->
+    <div class="grid-3 fade-in" style="margin-bottom:3rem">
+      <div class="card" style="text-align:center;border-top:3px solid #f44336">
+        <div style="font-size:2.5rem;margin-bottom:0.5rem">🚗</div>
+        <h4 style="color:var(--primary);margin-bottom:0.5rem">交通安全</h4>
+        <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:0.5rem">
+          子供は死角や危険を想像しにくい
+        </p>
+        <p style="font-size:0.85rem;color:var(--primary);font-weight:600">
+          → 「運転席からの視界」体験で危険性を自分事として理解
+        </p>
+      </div>
+      <div class="card" style="text-align:center;border-top:3px solid #9c27b0">
+        <div style="font-size:2.5rem;margin-bottom:0.5rem">❤️</div>
+        <h4 style="color:var(--primary);margin-bottom:0.5rem">教育・心理</h4>
+        <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:0.5rem">
+          過度な競争によるストレス・自己肯定感の低下
+        </p>
+        <p style="font-size:0.85rem;color:var(--primary);font-weight:600">
+          → 「競争」から「共創」へ。工夫や修理自体を評価
+        </p>
+      </div>
+      <div class="card" style="text-align:center;border-top:3px solid #4caf50">
+        <div style="font-size:2.5rem;margin-bottom:0.5rem">🏘️</div>
+        <h4 style="color:var(--primary);margin-bottom:0.5rem">地域社会</h4>
+        <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:0.5rem">
+          コミュニティの希薄化
+        </p>
+        <p style="font-size:0.85rem;color:var(--primary);font-weight:600">
+          → ラジコンという共通言語で多世代交流
+        </p>
+      </div>
+    </div>
+
+    <!-- スケールアウト戦略 -->
+    <h3 style="text-align:center;font-size:1.15rem;font-weight:700;color:var(--primary);margin-bottom:2rem" class="fade-in">🚀 スケールアウト戦略</h3>
+
+    <div class="diagram-wrapper fade-in">
+      <div class="diagram-title">成長ロードマップ</div>
+      <svg viewBox="0 0 900 260" xmlns="http://www.w3.org/2000/svg" style="font-family:'Noto Sans JP',sans-serif">
+        <defs>
+          <filter id="shadow5" x="-5%" y="-5%" width="110%" height="115%">
+            <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.1"/>
+          </filter>
+          <linearGradient id="gradStep" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#1a237e;stop-opacity:1"/>
+            <stop offset="50%" style="stop-color:#3949ab;stop-opacity:1"/>
+            <stop offset="100%" style="stop-color:#ff6f00;stop-opacity:1"/>
+          </linearGradient>
+        </defs>
+
+        <!-- 進行バー -->
+        <rect x="50" y="118" width="800" height="6" rx="3" fill="#e0e0e0"/>
+        <rect x="50" y="118" width="800" height="6" rx="3" fill="url(#gradStep)"/>
+
+        <!-- Step 1 -->
+        <circle cx="150" cy="121" r="22" fill="#1a237e" stroke="#fff" stroke-width="3" filter="url(#shadow5)"/>
+        <text x="150" y="127" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">1</text>
+        <rect x="50" y="160" width="200" height="80" rx="12" fill="#fff" filter="url(#shadow5)" stroke="#1a237e" stroke-width="1.5"/>
+        <text x="150" y="185" text-anchor="middle" fill="#1a237e" font-size="12" font-weight="700">🏪 1号店立ち上げ</text>
+        <text x="150" y="205" text-anchor="middle" fill="#5a5a7a" font-size="10">7坪モデルで実証</text>
+        <text x="150" y="222" text-anchor="middle" fill="#5a5a7a" font-size="10">KPI・運営ノウハウ蓄積</text>
+
+        <text x="150" y="90" text-anchor="middle" fill="#1a237e" font-size="11" font-weight="600">第1期：創業</text>
+
+        <!-- Step 2 -->
+        <circle cx="450" cy="121" r="22" fill="#3949ab" stroke="#fff" stroke-width="3" filter="url(#shadow5)"/>
+        <text x="450" y="127" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">2</text>
+        <rect x="350" y="160" width="200" height="80" rx="12" fill="#fff" filter="url(#shadow5)" stroke="#3949ab" stroke-width="1.5"/>
+        <text x="450" y="185" text-anchor="middle" fill="#3949ab" font-size="12" font-weight="700">📦 パッケージ化</text>
+        <text x="450" y="205" text-anchor="middle" fill="#5a5a7a" font-size="10">7坪モデルの標準化</text>
+        <text x="450" y="222" text-anchor="middle" fill="#5a5a7a" font-size="10">モール空き区画・空き店舗対応</text>
+
+        <text x="450" y="90" text-anchor="middle" fill="#3949ab" font-size="11" font-weight="600">第2期：成長</text>
+
+        <!-- Step 3 -->
+        <circle cx="750" cy="121" r="22" fill="#ff6f00" stroke="#fff" stroke-width="3" filter="url(#shadow5)"/>
+        <text x="750" y="127" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">3</text>
+        <rect x="650" y="160" width="200" height="80" rx="12" fill="#fff" filter="url(#shadow5)" stroke="#ff6f00" stroke-width="1.5"/>
+        <text x="750" y="185" text-anchor="middle" fill="#ff6f00" font-size="12" font-weight="700">🌏 全国展開（FC化）</text>
+        <text x="750" y="205" text-anchor="middle" fill="#5a5a7a" font-size="10">教育×空間マッチング</text>
+        <text x="750" y="222" text-anchor="middle" fill="#5a5a7a" font-size="10">STEAM教育の低価格化を実現</text>
+
+        <text x="750" y="90" text-anchor="middle" fill="#ff6f00" font-size="11" font-weight="600">第3期〜：拡張</text>
+      </svg>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== フッター ===== -->
+<footer class="footer">
+  <p>⚡ ふじた電気探求所 ー 事業計画書 2026</p>
+  <p style="margin-top:0.3rem;font-size:0.8rem;opacity:0.7">マニュアルを捨てる。それが、ふじた電気探求所の教育です。</p>
+</footer>
+
+<!-- ===== JavaScript ===== -->
+<script>
+// 画像パスを「このHTMLがあるフォルダ」基準で組み立て（file:// でも表示されるように）
+document.addEventListener('DOMContentLoaded', () => {
+  const pageHref = document.querySelector('base[href]')?.href || window.location.href;
+  const dir = pageHref.replace(/[^/]+$/, '');
+  const assetsBase = dir + 'assets/';
+  const heroImg = document.getElementById('hero-img');
+  if (heroImg && heroImg.dataset.src) {
+    heroImg.src = assetsBase + heroImg.dataset.src;
+  }
+  document.querySelectorAll('.concept-img').forEach((el) => {
+    if (el.dataset.src) el.src = assetsBase + el.dataset.src;
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+});
+
+// Chart.js: 売上構成推移
+const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+new Chart(revenueCtx, {
+  type: 'bar',
+  data: {
+    labels: ['第1期（創業期）', '第2期（成長期）', '第3期（拡張期）'],
+    datasets: [
+      {
+        label: 'スクール売上',
+        data: [1584, 3696, 5760],
+        backgroundColor: '#1a237e',
+        borderRadius: 4,
+      },
+      {
+        label: 'エンタメ売上',
+        data: [2016, 2304, 3500],
+        backgroundColor: '#ff6f00',
+        borderRadius: 4,
+      },
+      {
+        label: '広告事業',
+        data: [0, 600, 2400],
+        backgroundColor: '#2e7d32',
+        borderRadius: 4,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          font: { family: "'Noto Sans JP', sans-serif", size: 12 },
+          padding: 16,
+          usePointStyle: true,
+        }
+      },
+      tooltip: {
+        callbacks: {
+          label: (ctx) => `${ctx.dataset.label}: ${ctx.raw.toLocaleString()}千円`
+        }
+      }
+    },
+    scales: {
+      x: {
+        stacked: true,
+        grid: { display: false },
+        ticks: { font: { family: "'Noto Sans JP', sans-serif", size: 11 } }
+      },
+      y: {
+        stacked: true,
+        beginAtZero: true,
+        ticks: {
+          callback: (v) => v.toLocaleString() + '千円',
+          font: { family: "'Noto Sans JP', sans-serif", size: 11 }
+        },
+        grid: { color: 'rgba(0,0,0,0.05)' }
+      }
+    }
+  }
+});
+
+// Chart.js: 営業利益と利益率
+const profitCtx = document.getElementById('profitChart').getContext('2d');
+new Chart(profitCtx, {
+  type: 'bar',
+  data: {
+    labels: ['第1期（創業期）', '第2期（成長期）', '第3期（拡張期）'],
+    datasets: [
+      {
+        label: '売上高',
+        data: [3600, 6600, 11660],
+        backgroundColor: 'rgba(26, 35, 126, 0.15)',
+        borderColor: '#1a237e',
+        borderWidth: 2,
+        borderRadius: 4,
+        order: 2,
+      },
+      {
+        label: '営業利益',
+        data: [1260, 3840, 7980],
+        backgroundColor: 'rgba(255, 111, 0, 0.8)',
+        borderRadius: 4,
+        order: 3,
+      },
+      {
+        label: '利益率',
+        data: [35, 58, 68],
+        type: 'line',
+        borderColor: '#2e7d32',
+        backgroundColor: '#2e7d32',
+        borderWidth: 3,
+        pointRadius: 6,
+        pointBackgroundColor: '#2e7d32',
+        tension: 0.3,
+        yAxisID: 'y1',
+        order: 1,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          font: { family: "'Noto Sans JP', sans-serif", size: 12 },
+          padding: 16,
+          usePointStyle: true,
+        }
+      },
+      tooltip: {
+        callbacks: {
+          label: (ctx) => {
+            if (ctx.dataset.yAxisID === 'y1') return `利益率: ${ctx.raw}%`;
+            return `${ctx.dataset.label}: ${ctx.raw.toLocaleString()}千円`;
+          }
+        }
+      }
+    },
+    scales: {
+      x: {
+        grid: { display: false },
+        ticks: { font: { family: "'Noto Sans JP', sans-serif", size: 11 } }
+      },
+      y: {
+        beginAtZero: true,
+        position: 'left',
+        ticks: {
+          callback: (v) => v.toLocaleString() + '千円',
+          font: { family: "'Noto Sans JP', sans-serif", size: 11 }
+        },
+        grid: { color: 'rgba(0,0,0,0.05)' }
+      },
+      y1: {
+        beginAtZero: true,
+        position: 'right',
+        max: 100,
+        ticks: {
+          callback: (v) => v + '%',
+          font: { family: "'Noto Sans JP', sans-serif", size: 11 }
+        },
+        grid: { display: false }
+      }
+    }
+  }
+});
+</script>
+
+</body>
+</html>
