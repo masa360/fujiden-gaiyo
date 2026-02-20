@@ -175,40 +175,6 @@
       opacity: 0.8;
       margin-top: 0.2rem;
     }
-    .hero-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      gap: 3rem;
-      position: relative;
-      z-index: 1;
-    }
-    .hero-content {
-      flex: 1;
-      text-align: left;
-    }
-    .hero-content .hero-badge { margin-bottom: 1rem; }
-    .hero-content .hero-sub { margin-left: 0; margin-right: 0; text-align: left; }
-    .hero-visual {
-      flex-shrink: 0;
-      width: min(420px, 45vw);
-      max-width: 100%;
-    }
-    .hero-visual img {
-      width: 100%;
-      height: auto;
-      border-radius: var(--radius);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.25);
-      border: 3px solid rgba(255,255,255,0.2);
-      display: block;
-    }
-    .hero-reference-caption {
-      margin-top: 0.6rem;
-      font-size: 0.8rem;
-      opacity: 0.85;
-      text-align: center;
-    }
 
     /* ===== コンテナ ===== */
     .container {
@@ -288,50 +254,6 @@
     .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
     .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
     .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
-
-    /* ===== 事業コンセプト写真（何をするか） ===== */
-    .concept-photos {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-top: 2.5rem;
-      margin-bottom: 2rem;
-    }
-    .concept-photo-item {
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-      overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .concept-photo-item:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
-    }
-    .concept-photo-item img {
-      width: 100%;
-      height: auto;
-      aspect-ratio: 4/3;
-      object-fit: cover;
-      display: block;
-    }
-    .concept-photo-caption {
-      padding: 1rem 1.2rem;
-      font-size: 0.9rem;
-      color: var(--text);
-      line-height: 1.6;
-      font-weight: 500;
-    }
-    .concept-photo-caption strong {
-      display: block;
-      color: var(--primary);
-      font-size: 0.95rem;
-      margin-bottom: 0.35rem;
-    }
-    @media (max-width: 768px) {
-      .concept-photos { grid-template-columns: 1fr; }
-    }
 
     /* ===== 図解用SVG ===== */
     .diagram-wrapper {
@@ -637,10 +559,6 @@
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .hero { padding: 3rem 1.5rem 2.5rem; }
-      .hero-inner { flex-direction: column; gap: 2rem; }
-      .hero-content { text-align: center; }
-      .hero-content .hero-sub { text-align: center; }
-      .hero-visual { width: 100%; max-width: 340px; margin: 0 auto; }
       .hero-stats { gap: 1rem; }
       .hero-stat { min-width: 130px; padding: 1rem; }
       .section { padding: 2.5rem 0; }
@@ -648,12 +566,33 @@
       .statement { padding: 2rem 1.5rem; }
     }
 
-    /* ===== 印刷用スタイル ===== */
+    /* ===== 印刷用スタイル（1スライド = 1ページ） ===== */
     @media print {
       .nav { display: none; }
       .hero { margin-top: 0; }
       .fade-in { opacity: 1 !important; transform: none !important; }
       body { font-size: 12px; }
+
+      /* 各ブロックの前に改ページ → 1スライド1ページ */
+      .hero {
+        page-break-after: always;
+        break-after: page;
+      }
+      .section {
+        page-break-before: always;
+        break-before: page;
+      }
+      .footer {
+        page-break-before: always;
+        break-before: page;
+      }
+      /* 図解・カードがページの途中で分かれないようにする */
+      .diagram-wrapper,
+      .chart-card,
+      .table-wrapper {
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
     }
   </style>
 </head>
@@ -674,31 +613,20 @@
 
 <!-- ===== ヒーロー ===== -->
 <header class="hero">
-  <div class="hero-inner">
-    <div class="hero-content">
-      <div class="hero-badge">📄 Business Plan 2026</div>
-      <h1>ふじた電気探求所<br><span>事業計画書</span></h1>
-      <p class="hero-sub">
-        動くトミカの世界へダイブ！<br>
-        遊びが「発明」に変わる、日本一小さな社会実験場
-      </p>
-    </div>
-    <div class="hero-visual">
-      <img id="hero-img" data-src="hero-diorama.png" alt="4階建て立体都市ジオラマ — トミカサイズの世界で探求・走行する舞台" width="600" height="400" loading="eager">
-      <p class="hero-reference-caption">参考：4階建て立体都市ジオラマ（地上3cmの視点で探求する舞台）</p>
-    </div>
-  </div>
+  <div class="hero-badge">📄 Business Plan 2026</div>
+  <h1>ふじた電気探求所<br><span>事業計画書</span></h1>
+  <p class="hero-sub">動くトミカの世界へ。遊びが発明に変わる、日本一小さな社会実験場。</p>
   <div class="hero-stats">
     <div class="hero-stat">
       <div class="hero-stat-value">7坪</div>
       <div class="hero-stat-label">省スペース運営</div>
     </div>
     <div class="hero-stat">
-      <div class="hero-stat-value">¥1,166万</div>
+      <div class="hero-stat-value">¥758万</div>
       <div class="hero-stat-label">3期目 売上目標</div>
     </div>
     <div class="hero-stat">
-      <div class="hero-stat-value">68%</div>
+      <div class="hero-stat-value">62%</div>
       <div class="hero-stat-label">3期目 利益率</div>
     </div>
     <div class="hero-stat">
@@ -714,12 +642,12 @@
     <div class="section-header fade-in">
       <div class="section-number">1</div>
       <h2 class="section-title">事業概要とコンセプト</h2>
-      <p class="section-desc">トミカサイズの世界に入り込んで、遊びながら「エンジニアの芽」を育てる</p>
+      <p class="section-desc">トミカサイズの世界で遊びながらエンジニアの芽を育てる</p>
     </div>
 
     <!-- ビジョン図解 -->
     <div class="diagram-wrapper fade-in">
-      <div class="diagram-title">🎯 事業コンセプト：「知識の消費者」から「創造者」へ</div>
+      <div class="diagram-title">事業コンセプト：消費者から創造者へ</div>
       <svg viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg" style="font-family:'Noto Sans JP',sans-serif">
         <!-- 背景 -->
         <defs>
@@ -791,49 +719,16 @@
           <div class="card-icon" style="background:#e8eaf6;color:#1a237e">🎥</div>
           没入感の創出
         </div>
-        <p style="font-size:0.9rem;color:var(--text-light);margin-bottom:1rem">
-          4階建ての立体都市ジオラマを舞台に、カメラ映像を頼りに運転。肉眼では見えない死角を探検・謎解きする。
-        </p>
-        <span class="tag tag-primary">空間認識能力</span>
-        <span class="tag tag-info">立体構造の把握</span>
+        <p style="font-size:0.88rem;color:var(--text-light)">ジオラマをカメラ映像で走行。死角を探検し空間認識を養う。</p>
+        <span class="tag tag-primary">空間認識</span>
       </div>
       <div class="card">
         <div class="card-title">
           <div class="card-icon" style="background:#fff3e0;color:#ff6f00">🔄</div>
-          視点の転換（リフレーミング）
+          視点の転換
         </div>
-        <p style="font-size:0.9rem;color:var(--text-light);margin-bottom:1rem">
-          運転席の視点（地上3センチ）になることで、普段見慣れた世界が全く新しい発見と学びの場に変わる。
-        </p>
+        <p style="font-size:0.88rem;color:var(--text-light)">地上3cm視点で普段の世界が学びの場に変わる。観察力・危険予知。</p>
         <span class="tag tag-accent">観察力</span>
-        <span class="tag tag-success">危険予知</span>
-      </div>
-    </div>
-
-    <!-- 実際に何をするのか（3枚の写真で伝える） -->
-    <h3 style="text-align:center;font-size:1.15rem;font-weight:700;color:var(--primary);margin-bottom:0.5rem" class="fade-in">📷 実際に何をするのか — イメージで伝える</h3>
-    <p style="text-align:center;font-size:0.9rem;color:var(--text-light);margin-bottom:0;max-width:600px;margin-left:auto;margin-right:auto" class="fade-in">ラジコンと3Dプリンタと電気の応用で、遊びながら「発明」する体験の具体像です。</p>
-    <div class="concept-photos fade-in">
-      <div class="concept-photo-item">
-        <img class="concept-img" data-src="concept-fpv.png" alt="スマホでFPV映像を見ながらラジコンを操作">
-        <div class="concept-photo-caption">
-          <strong>① FPVで「車の目」になる</strong>
-          Wi-Fiで接続し、スマホに映るリアルタイム映像を見ながら操作。車体の目線（地上3cm）でジオラマを走り、探検する。
-        </div>
-      </div>
-      <div class="concept-photo-item">
-        <img class="concept-img" data-src="concept-diorama.png" alt="トミカの世界のジオラマ都市を走行">
-        <div class="concept-photo-caption">
-          <strong>② トミカの世界で走る</strong>
-          立体都市ジオラマ（道路・建物・街並み）を舞台に、カメラ越しで没入。フリー走行やミッションで「遊び」がそのまま学びに。
-        </div>
-      </div>
-      <div class="concept-photo-item">
-        <img class="concept-img" data-src="concept-3d.png" alt="3Dプリントの駐車場とカスタム車両・LED">
-        <div class="concept-photo-caption">
-          <strong>③ 3Dプリント＆電気で自分だけの一台に</strong>
-          駐車場やパーツを3Dプリンタで制作。LEDやカスタムボディで「電気の応用」を体験し、壊して直すからこそ身につく。
-        </div>
       </div>
     </div>
   </div>
@@ -845,7 +740,7 @@
     <div class="section-header fade-in">
       <div class="section-number">2</div>
       <h2 class="section-title">サービス展開</h2>
-      <p class="section-desc">平日と休日でハイブリッド運営。資産の稼働率を最大化します</p>
+      <p class="section-desc">平日スクール・休日エンタメで資産稼働率を最大化</p>
     </div>
 
     <!-- ハイブリッドモデル図解 -->
@@ -878,6 +773,7 @@
         <rect x="20" y="50" width="240" height="44" rx="14" fill="url(#gradWeekday)"/>
         <rect x="20" y="80" width="240" height="14" fill="url(#gradWeekday)"/>
         <text x="140" y="78" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">📚 平日：探求学習スクール</text>
+        <text x="140" y="98" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="9.5">小4〜6特化・1枠6名・定員30名</text>
 
         <text x="45" y="125" fill="#1a237e" font-size="11" font-weight="600">エンジニアリング・デザイン</text>
         <text x="45" y="148" fill="#5a5a7a" font-size="10.5">🏗️ 3Dプリンタ・LEGOで街づくり</text>
@@ -934,37 +830,56 @@
     </div>
 
     <!-- 3つの価値 -->
-    <h3 style="text-align:center;font-size:1.2rem;font-weight:700;color:var(--primary);margin-bottom:1.5rem" class="fade-in">提供する3つの価値</h3>
+    <h3 style="text-align:center;font-size:1.1rem;font-weight:700;color:var(--primary);margin-bottom:1rem" class="fade-in">3つの価値</h3>
     <div class="grid-3 fade-in">
       <div class="card" style="border-top:3px solid var(--primary)">
         <div class="card-title">
           <div class="card-icon" style="background:#e8eaf6;color:#1a237e">🧠</div>
-          遊びが「思考」に変わる
+          遊び→思考
         </div>
-        <p style="font-size:0.88rem;color:var(--text-light)">
-          カメラ越しの不便な視界で操作。実車の運転感覚に近い体験を通じ、日常に隠された工夫への気づきや応用力を養う。
-        </p>
-        <div style="margin-top:0.8rem"><span class="tag tag-primary">不便益の活用</span></div>
+        <p style="font-size:0.85rem;color:var(--text-light)">カメラ越しの不便な視界で操作。日常の工夫への気づき。</p>
+        <span class="tag tag-primary">不便益</span>
       </div>
       <div class="card" style="border-top:3px solid var(--accent)">
         <div class="card-title">
           <div class="card-icon" style="background:#fff3e0;color:#ff6f00">🔧</div>
-          失敗大歓迎！壊して学ぶ
+          壊して学ぶ
         </div>
-        <p style="font-size:0.88rem;color:var(--text-light)">
-          故障を「中身を知るチャンス」と定義。分解して原因を探るプロセスで、「消費する側」から「修理・創造する側」へ。
-        </p>
-        <div style="margin-top:0.8rem"><span class="tag tag-accent">ハッカー思考</span></div>
+        <p style="font-size:0.85rem;color:var(--text-light)">故障＝中身を知るチャンス。消費側から修理・創造側へ。</p>
+        <span class="tag tag-accent">ハッカー思考</span>
       </div>
       <div class="card" style="border-top:3px solid var(--success)">
         <div class="card-title">
           <div class="card-icon" style="background:#e8f5e9;color:#2e7d32">🏠</div>
           安全な避難所
         </div>
-        <p style="font-size:0.88rem;color:var(--text-light)">
-          酷暑・寒波に対応した屋内シェルター。子供が着座して集中するため怪我のリスクが低く、保護者は安心して休息可能。
-        </p>
-        <div style="margin-top:0.8rem"><span class="tag tag-success">全天候型</span></div>
+        <p style="font-size:0.85rem;color:var(--text-light)">酷暑・寒波対応の屋内シェルター。着座型で怪我リスク低。</p>
+        <span class="tag tag-success">全天候型</span>
+      </div>
+    </div>
+
+    <!-- 1/64スマートシティ 探究の4ステップ -->
+    <h3 style="text-align:center;font-size:1.1rem;font-weight:700;color:var(--primary);margin:2rem 0 1rem" class="fade-in">🏙️ 「1/64スマートシティ」探究の4ステップ</h3>
+    <div class="steps fade-in" style="margin-bottom:1.5rem">
+      <div class="step-card" style="border-top:3px solid #c62828">
+        <div class="step-num" style="background:linear-gradient(135deg,#c62828,#e53935)">1</div>
+        <div class="step-title">分解と修復</div>
+        <div class="step-desc">ラジコンを分解し原因特定。3Dプリンタでパーツ自作。「ユーザー」から「メーカー」へ。</div>
+      </div>
+      <div class="step-card" style="border-top:3px solid #1565c0">
+        <div class="step-num" style="background:linear-gradient(135deg,#1565c0,#1976d2)">2</div>
+        <div class="step-title">インフラ実装</div>
+        <div class="step-desc">電柱・配線・信号機を自ら組む。都市の裏側を再現。</div>
+      </div>
+      <div class="step-card" style="border-top:3px solid #2e7d32">
+        <div class="step-num" style="background:linear-gradient(135deg,#2e7d32,#43a047)">3</div>
+        <div class="step-title">自動化の試作（Arduino）</div>
+        <div class="step-desc">センサー・ロボットアームで「ゲート開閉」「荷物仕分け」。ベルトコンベア連動。</div>
+      </div>
+      <div class="step-card" style="border-top:3px solid #ff6f00">
+        <div class="step-num" style="background:linear-gradient(135deg,#ff6f00,#ff9800)">4</div>
+        <div class="step-title">未来への実験</div>
+        <div class="step-desc">失敗し放題のサンドボックス。効率化・渋滞対策などを試行錯誤。</div>
       </div>
     </div>
   </div>
@@ -976,12 +891,12 @@
     <div class="section-header fade-in">
       <div class="section-number">3</div>
       <h2 class="section-title">ビジネスモデルと持続可能性</h2>
-      <p class="section-desc">3つの収益の柱で安定成長を実現</p>
+      <p class="section-desc">スクール・エンタメ・広告の3本柱</p>
     </div>
 
     <!-- 収益構造図解 -->
     <div class="diagram-wrapper fade-in">
-      <div class="diagram-title">💰 3つの収益の柱と成長構造</div>
+      <div class="diagram-title">3つの収益の柱</div>
       <svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" style="font-family:'Noto Sans JP',sans-serif">
         <defs>
           <filter id="shadow3" x="-5%" y="-5%" width="110%" height="115%">
@@ -997,11 +912,11 @@
         <text x="160" y="100" text-anchor="middle" fill="#1a237e" font-size="22" font-weight="900">月謝制</text>
         <text x="160" y="125" text-anchor="middle" fill="#5a5a7a" font-size="11">ストック型収益 = 安定基盤</text>
         <line x1="70" y1="140" x2="250" y2="140" stroke="#e8e8f0" stroke-width="1"/>
-        <text x="55" y="165" fill="#5a5a7a" font-size="10.5">👦 会員数: 22名 → 38名 → 40名</text>
-        <text x="55" y="188" fill="#5a5a7a" font-size="10.5">💴 単価: ¥6,000 → ¥8,000 → ¥12,000</text>
-        <text x="55" y="211" fill="#5a5a7a" font-size="10.5">📈 売上: 158万 → 369万 → 576万</text>
+        <text x="55" y="165" fill="#5a5a7a" font-size="10.5">👦 小4〜6特化・1枠6名 定員30名</text>
+        <text x="55" y="188" fill="#5a5a7a" font-size="10.5">💴 1期¥6k 2期〜¥8k</text>
+        <text x="55" y="211" fill="#5a5a7a" font-size="10.5">📈 売上: 130万→230万→288万</text>
         <rect x="55" y="230" width="210" height="30" rx="8" fill="#e8eaf6"/>
-        <text x="160" y="250" text-anchor="middle" fill="#1a237e" font-size="10.5" font-weight="600">🔒 毎月の固定費をカバー</text>
+        <text x="160" y="250" text-anchor="middle" fill="#1a237e" font-size="10.5" font-weight="600">🔒 少人数で質・安全を確保</text>
 
         <!-- 柱2: エンタメ -->
         <rect x="320" y="30" width="260" height="250" rx="14" fill="#fff" filter="url(#shadow3)" stroke="#ff6f00" stroke-width="2"/>
@@ -1025,11 +940,12 @@
         <text x="740" y="100" text-anchor="middle" fill="#2e7d32" font-size="22" font-weight="900">広告掲載費</text>
         <text x="740" y="125" text-anchor="middle" fill="#5a5a7a" font-size="11">原価ゼロの高利益事業</text>
         <line x1="650" y1="140" x2="830" y2="140" stroke="#e8e8f0" stroke-width="1"/>
-        <text x="635" y="165" fill="#5a5a7a" font-size="10.5">🏢 月額¥10,000/社</text>
-        <text x="635" y="188" fill="#5a5a7a" font-size="10.5">📊 0社 → 5社 → 20社</text>
-        <text x="635" y="211" fill="#5a5a7a" font-size="10.5">📈 売上: 0万 → 60万 → 240万</text>
+        <text x="635" y="165" fill="#5a5a7a" font-size="10.5">🏢 応援枠 月額¥5,000/社中心</text>
+        <text x="635" y="188" fill="#5a5a7a" font-size="10.5">📊 0社 → 5社（保守的見込み）</text>
+        <text x="635" y="211" fill="#5a5a7a" font-size="10.5">📈 売上: 0万→30万→120万（50%削減後）</text>
         <rect x="635" y="230" width="210" height="30" rx="8" fill="#e8f5e9"/>
-        <text x="740" y="250" text-anchor="middle" fill="#2e7d32" font-size="10.5" font-weight="600">🚀 3期目の利益率を大幅押上</text>
+        <text x="740" y="250" text-anchor="middle" fill="#2e7d32" font-size="10.5" font-weight="600">地域コミュニティ拠点として認知優先</text>
+        <text x="740" y="268" text-anchor="middle" fill="#2e7d32" font-size="9" font-weight="600">※掲載企業は持続化補助金で費用の一部賄可</text>
 
         <!-- 下部: コスト構造 -->
         <rect x="130" y="310" width="640" height="90" rx="14" fill="#fff" filter="url(#shadow3)" stroke="#e8e8f0" stroke-width="1.5"/>
@@ -1055,30 +971,30 @@
     <div class="section-header fade-in">
       <div class="section-number">4</div>
       <h2 class="section-title">収支計画（数値計画詳細）</h2>
-      <p class="section-desc">第3期は広告事業の拡大により、売上1,000万円超えを目指すロードマップ</p>
+      <p class="section-desc">広告50%削減・少人数制の保守的計画</p>
     </div>
 
     <!-- KPI -->
     <div class="kpi-grid fade-in">
       <div class="kpi-card">
-        <div class="kpi-value">360万</div>
+        <div class="kpi-value">331万</div>
         <div class="kpi-label">第1期 売上</div>
         <div class="kpi-change kpi-up">創業期</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-value">660万</div>
+        <div class="kpi-value">491万</div>
         <div class="kpi-label">第2期 売上</div>
-        <div class="kpi-change kpi-up">▲ +83%</div>
+        <div class="kpi-change kpi-up">▲ +48%</div>
       </div>
       <div class="kpi-card kpi-accent">
-        <div class="kpi-value">1,166万</div>
+        <div class="kpi-value">758万</div>
         <div class="kpi-label">第3期 売上</div>
-        <div class="kpi-change kpi-up">▲ +77%</div>
+        <div class="kpi-change kpi-up">▲ +54%</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-value">798万</div>
+        <div class="kpi-value">472万</div>
         <div class="kpi-label">第3期 営業利益</div>
-        <div class="kpi-change kpi-up">利益率 68%</div>
+        <div class="kpi-change kpi-up">利益率 62%</div>
       </div>
     </div>
 
@@ -1110,17 +1026,17 @@
           <tbody>
             <tr class="highlight-row">
               <td><strong>売上高 合計</strong></td>
-              <td><strong>3,600千円</strong></td>
-              <td><strong>6,600千円</strong></td>
-              <td><strong>11,660千円</strong></td>
-              <td>広告事業の伸長により3期目が飛躍</td>
+              <td><strong>3,312千円</strong></td>
+              <td><strong>4,908千円</strong></td>
+              <td><strong>7,580千円</strong></td>
+              <td>広告50%削減・少人数制で保守的</td>
             </tr>
             <tr>
               <td>① スクール売上</td>
-              <td>1,584千円</td>
-              <td>3,696千円</td>
-              <td>5,760千円</td>
-              <td>1期:22名(¥6k) → 2期:38名(¥8k) → 3期:40名(¥12k)</td>
+              <td>1,296千円</td>
+              <td>2,304千円</td>
+              <td>2,880千円</td>
+              <td>小4〜6・1枠6名・定員30名。1期18名¥6k→2期24名¥8k→3期30名満員</td>
             </tr>
             <tr>
               <td>② エンタメ売上</td>
@@ -1132,15 +1048,15 @@
             <tr>
               <td>③ 広告事業</td>
               <td>0千円</td>
-              <td>600千円</td>
-              <td>2,400千円</td>
-              <td>月額¥10,000/社 × 0→5→20社</td>
+              <td>300千円</td>
+              <td>1,200千円</td>
+              <td>応援枠¥5,000/社。2期5社／3期は50%削減見込みで保守的計画</td>
             </tr>
             <tr class="highlight-row">
               <td><strong>経費合計</strong></td>
-              <td><strong>2,340千円</strong></td>
-              <td><strong>2,760千円</strong></td>
-              <td><strong>3,680千円</strong></td>
+              <td><strong>2,100千円</strong></td>
+              <td><strong>2,180千円</strong></td>
+              <td><strong>2,860千円</strong></td>
               <td></td>
             </tr>
             <tr>
@@ -1148,7 +1064,7 @@
               <td>960千円</td>
               <td>980千円</td>
               <td>1,600千円</td>
-              <td>1-2期:代表+アルバイト / 3期:スタッフ増員</td>
+              <td>代表＋サポーター（シルバー人材・学生／謝礼は交通費程度）</td>
             </tr>
             <tr>
               <td>家賃</td>
@@ -1159,43 +1075,48 @@
             </tr>
             <tr>
               <td>その他経費</td>
-              <td>600千円</td>
-              <td>1,000千円</td>
-              <td>1,300千円</td>
-              <td>光熱費・通信費・広告宣伝費・消耗品費等</td>
+              <td>360千円</td>
+              <td>420千円</td>
+              <td>480千円</td>
+              <td>光熱・通信・広告・消耗品等（月3〜4万）</td>
             </tr>
             <tr class="highlight-row" style="color:var(--success)">
               <td><strong>営業利益</strong></td>
-              <td><strong>1,260千円</strong></td>
-              <td><strong>3,840千円</strong></td>
-              <td><strong>7,980千円</strong></td>
-              <td><strong>利益率: 35% → 58% → 68%</strong></td>
+              <td><strong>1,212千円</strong></td>
+              <td><strong>2,728千円</strong></td>
+              <td><strong>4,720千円</strong></td>
+              <td><strong>利益率: 37% → 56% → 62%</strong></td>
+            </tr>
+            <tr>
+              <td colspan="5" style="background:var(--info-light);padding:1rem;font-size:0.85rem;">
+                <strong>📌 損益分岐点：</strong> 経費2,100千円/年。スクール単価¥6,000なら会員約29名で損益分岐。定員30名+エンタメで黒字化。
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
 
-    <!-- 投資計画 -->
+    <!-- 投資・運営体制 -->
     <div class="grid-2 fade-in" style="margin-top:1.5rem">
       <div class="card" style="border-left:4px solid var(--primary)">
         <div class="card-title">
           <div class="card-icon" style="background:#e8eaf6;color:#1a237e">🏗️</div>
-          初期投資（機材・設備）
+          初期投資・変動費
         </div>
-        <p style="font-size:0.88rem;color:var(--text-light)">
-          省スペース（2畳〜7坪）でのスモールスタート。ラジコン・カメラ機材・3Dプリンタ・ジオラマ資材へ集中投資。
-        </p>
+        <p style="font-size:0.85rem;color:var(--text-light)">2畳〜7坪スモールスタート。ラジコン・3Dプリンタ・ジオラマへ集中投資。故障は修理体験で教育価値に転換。</p>
       </div>
-      <div class="card" style="border-left:4px solid var(--accent)">
+      <div class="card" style="border-left:4px solid #2e7d32">
         <div class="card-title">
-          <div class="card-icon" style="background:#fff3e0;color:#ff6f00">🔧</div>
-          変動費（維持・修繕）
+          <div class="card-icon" style="background:#e8f5e9;color:#2e7d32">👥</div>
+          代表＋サポーター体制
         </div>
-        <p style="font-size:0.88rem;color:var(--text-light)">
-          パーツ故障を「修理体験イベント」で収益化し、コストを教育価値に転換。配布用パーツは広告宣伝費として処理。
-        </p>
+        <p style="font-size:0.85rem;color:var(--text-light)">シルバー人材・技術系学生を「ラボ・サポーター」に。謝礼は交通費程度で大人2名体制に近づける。緊急連絡フローはマニュアル化し常備。</p>
       </div>
+    </div>
+
+    <div class="statement fade-in" style="margin-top:1.5rem;background:linear-gradient(135deg,#1565c0,#0d47a1);padding:1.5rem 2rem">
+      <p style="font-size:0.9rem;margin:0"><strong>「一人で大丈夫か？」→</strong> 定員6名で収支を筋肉質にした上で、<strong>地域のメカ好きシニアをサポーターに巻き込む。</strong>子供が「地域の名人」に学ぶ多世代交流型の選択。</p>
     </div>
 
   </div>
@@ -1207,16 +1128,14 @@
     <div class="section-header fade-in">
       <div class="section-number">5</div>
       <h2 class="section-title">マーケットと競争優位性</h2>
-      <p class="section-desc">「なぜ今なのか？」2つの巨大トレンドの衝突が生む必然のブルーオーシャン</p>
+      <p class="section-desc">気候×教育の交差点で生まれるブルーオーシャン</p>
     </div>
 
-    <!-- ===== 5.1 マクロ環境分析 ===== -->
-    <h3 style="text-align:center;font-size:1.2rem;font-weight:700;color:var(--primary);margin-bottom:0.5rem" class="fade-in">5.1 マクロ環境分析</h3>
-    <p style="text-align:center;font-size:0.9rem;color:var(--text-light);margin-bottom:2rem" class="fade-in">不可逆的な「気候変動」と「教育変革」が交差する地点に生まれたブルーオーシャン</p>
+    <h3 style="text-align:center;font-size:1.1rem;font-weight:700;color:var(--primary);margin-bottom:1rem" class="fade-in">5.1 マクロ環境分析</h3>
 
     <!-- 2つのトレンド衝突図解 -->
     <div class="diagram-wrapper fade-in">
-      <div class="diagram-title">🌍 2つの巨大トレンドの衝突 → ブルーオーシャンの誕生</div>
+      <div class="diagram-title">2つのトレンドの衝突 → ブルーオーシャン</div>
       <svg viewBox="0 0 900 480" xmlns="http://www.w3.org/2000/svg" style="font-family:'Noto Sans JP',sans-serif">
         <defs>
           <filter id="shadowMacro" x="-5%" y="-5%" width="110%" height="115%">
@@ -1312,56 +1231,12 @@
       </svg>
     </div>
 
-    <!-- マクロトレンド詳細テーブル -->
-    <div class="table-wrapper fade-in" style="margin-bottom:3rem">
-      <table>
-        <thead>
-          <tr>
-            <th style="width:18%">トレンド</th>
-            <th style="width:42%">データによる裏付け</th>
-            <th style="width:40%">事業へのインパクト</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <span style="color:#c62828;font-weight:700">🌡️ 1. 気候変動</span><br>
-              <span class="tag" style="background:#fbe9e7;color:#c62828">PUSH要因</span>
-            </td>
-            <td>
-              <strong>猛暑日の常態化:</strong> 過去30年で猛暑日は<strong style="color:#c62828">3.9倍</strong>に増加。<br>
-              <strong>子ども体感温度:</strong> 地表近くは大人より<strong style="color:#c62828">+7.1℃</strong>（気温31℃でも子どもは38.2℃）
-            </td>
-            <td>
-              <strong style="color:#c62828">【強制的な屋内退避】</strong><br>
-              夏の「外遊び」は物理的に不可能に。安全な「気候シェルター（屋内インフラ）」への需要が爆発的に増加。
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <span style="color:#0d47a1;font-weight:700">📚 2. 教育変革</span><br>
-              <span class="tag" style="background:#e3f2fd;color:#0d47a1">PULL要因</span>
-            </td>
-            <td>
-              <strong>情報I 必修化:</strong> 2025年より大学入試に「情報」導入。<br>
-              <strong>市場拡大:</strong> プログラミング教育市場は2030年に<strong style="color:#0d47a1">1,000億円</strong>規模へ。
-            </td>
-            <td>
-              <strong style="color:#0d47a1">【教育費の固定費化】</strong><br>
-              プログラミングは「趣味の習い事」から、進学・キャリアのための「必須投資」へと質的転換。
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
     <!-- ===== 5.2 顧客インサイト ===== -->
-    <h3 style="text-align:center;font-size:1.2rem;font-weight:700;color:var(--primary);margin-bottom:0.5rem" class="fade-in">5.2 顧客インサイト</h3>
-    <p style="text-align:center;font-size:0.9rem;color:var(--text-light);margin-bottom:2rem" class="fade-in">保護者を襲う「ダブル不安」を同時に解決する唯一のソリューション</p>
+    <h3 style="text-align:center;font-size:1.1rem;font-weight:700;color:var(--primary);margin:2rem 0 1rem" class="fade-in">5.2 顧客インサイト</h3>
 
     <!-- ダブル不安 → 解決 図解 -->
     <div class="diagram-wrapper fade-in">
-      <div class="diagram-title">😰 保護者の「ダブル不安」と解決メカニズム</div>
+      <div class="diagram-title">保護者のダブル不安と解決</div>
       <svg viewBox="0 0 900 440" xmlns="http://www.w3.org/2000/svg" style="font-family:'Noto Sans JP',sans-serif">
         <defs>
           <filter id="shadowInsight" x="-5%" y="-5%" width="110%" height="115%">
@@ -1421,45 +1296,30 @@
       </svg>
     </div>
 
-    <!-- ターゲット層 -->
-    <h3 style="text-align:center;font-size:1.05rem;font-weight:700;color:var(--primary);margin-bottom:1.5rem" class="fade-in">🎯 ターゲット層とアプローチ</h3>
-    <div class="grid-3 fade-in" style="margin-bottom:3rem">
+    <h3 style="text-align:center;font-size:1rem;font-weight:700;color:var(--primary);margin-bottom:1rem" class="fade-in">🎯 ターゲット</h3>
+    <div class="grid-3 fade-in" style="margin-bottom:2rem">
       <div class="card" style="text-align:center;border-top:3px solid #42a5f5">
-        <div style="font-size:2.5rem;margin-bottom:0.5rem">👦</div>
-        <h4 style="color:var(--primary);margin-bottom:0.5rem">お子様</h4>
-        <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:0.8rem">
-          「ゲームよりも実物がいい」<br>「自分だけのマシンを作りたい」
-        </p>
-        <span class="tag tag-info">FPV操作体験</span>
-        <span class="tag tag-primary">カスタマイズ</span>
+        <div style="font-size:2rem;margin-bottom:0.3rem">👦</div>
+        <h4 style="color:var(--primary);font-size:0.95rem;margin-bottom:0.3rem">小4〜6</h4>
+        <p style="font-size:0.82rem;color:var(--text-light)">高学年特化・1枠6名・定員30名。FPV・3Dプリンタ・修理。</p>
       </div>
       <div class="card" style="text-align:center;border-top:3px solid #ab47bc">
-        <div style="font-size:2.5rem;margin-bottom:0.5rem">👩</div>
-        <h4 style="color:var(--primary);margin-bottom:0.5rem">親御様</h4>
-        <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:0.8rem">
-          「動画ばかり見せず現実体験を」<br>「休みたいが罪悪感がある」
-        </p>
-        <span class="tag tag-accent">思考力カリキュラム</span>
-        <span class="tag tag-success">安心休息</span>
+        <div style="font-size:2rem;margin-bottom:0.3rem">👩</div>
+        <h4 style="color:var(--primary);font-size:0.95rem;margin-bottom:0.3rem">親御様</h4>
+        <p style="font-size:0.82rem;color:var(--text-light)">「現実体験を」「休みたいが罪悪感」→安心＋教育投資の実感。</p>
       </div>
       <div class="card" style="text-align:center;border-top:3px solid #66bb6a">
-        <div style="font-size:2.5rem;margin-bottom:0.5rem">🏢</div>
-        <h4 style="color:var(--primary);margin-bottom:0.5rem">企業</h4>
-        <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:0.8rem">
-          「子供向けにPRしたい」<br>「空きスペースを有効活用」
-        </p>
-        <span class="tag tag-primary">ジオラマ内広告</span>
-        <span class="tag tag-accent">省スペース出店</span>
+        <div style="font-size:2rem;margin-bottom:0.3rem">🏢</div>
+        <h4 style="color:var(--primary);font-size:0.95rem;margin-bottom:0.3rem">企業</h4>
+        <p style="font-size:0.82rem;color:var(--text-light)">子供向けPR・空きスペース活用。ジオラマ広告・省スペース出店。</p>
       </div>
     </div>
 
-    <!-- ===== 5.3 公教育の限界とブルーオーシャン ===== -->
-    <h3 style="text-align:center;font-size:1.2rem;font-weight:700;color:var(--primary);margin-bottom:0.5rem" class="fade-in">5.3 公教育の限界とブルーオーシャン</h3>
-    <p style="text-align:center;font-size:0.9rem;color:var(--text-light);margin-bottom:2rem" class="fade-in">GIGAスクール構想の「欠落」が生む市場の空白</p>
+    <h3 style="text-align:center;font-size:1.1rem;font-weight:700;color:var(--primary);margin:2rem 0 1rem" class="fade-in">5.3 公教育の限界とブルーオーシャン</h3>
 
     <!-- 公教育の限界 図解 -->
     <div class="diagram-wrapper fade-in">
-      <div class="diagram-title">🏫 GIGAスクール構想の「入力と出力」ギャップ</div>
+      <div class="diagram-title">GIGAスクール：入力と出力のギャップ</div>
       <svg viewBox="0 0 900 360" xmlns="http://www.w3.org/2000/svg" style="font-family:'Noto Sans JP',sans-serif">
         <defs>
           <filter id="shadowGiga" x="-5%" y="-5%" width="110%" height="115%">
@@ -1524,34 +1384,12 @@
       </svg>
     </div>
 
-    <div class="grid-2 fade-in" style="margin-bottom:3rem">
-      <div class="card" style="border-left:4px solid #c62828">
-        <div class="card-title">
-          <div class="card-icon" style="background:#fbe9e7;color:#c62828">🏫</div>
-          公教育の限界（Opportunity Gap）
-        </div>
-        <p style="font-size:0.88rem;color:var(--text-light)">
-          タブレット（入力装置）はあっても、<strong>3Dプリンタや工作機械といった「物理的モノづくり環境（出力装置）」</strong>が圧倒的に不足。画面の中だけの学習では「リアルな手触り」が得られない。
-        </p>
-      </div>
-      <div class="card" style="border-left:4px solid var(--accent)">
-        <div class="card-title">
-          <div class="card-icon" style="background:#fff3e0;color:#ff6f00">🌊</div>
-          独自のブルーオーシャン
-        </div>
-        <p style="font-size:0.88rem;color:var(--text-light)">
-          この<strong>「デジタル × フィジカル」の領域</strong>こそが、大手資本も公教育も参入しにくい、本事業独自のブルーオーシャン。7坪のマイクロラボだからこそ機動的に占拠できる。
-        </p>
-      </div>
-    </div>
-
     <!-- ===== 5.4 独自のポジショニング ===== -->
-    <h3 style="text-align:center;font-size:1.2rem;font-weight:700;color:var(--primary);margin-bottom:0.5rem" class="fade-in">5.4 独自のポジショニング</h3>
-    <p style="text-align:center;font-size:0.9rem;color:var(--text-light);margin-bottom:2rem" class="fade-in">主要3分野との徹底比較</p>
+    <h3 style="text-align:center;font-size:1.1rem;font-weight:700;color:var(--primary);margin:2rem 0 1rem" class="fade-in">5.4 独自のポジショニング</h3>
 
     <!-- ポジショニングマップ -->
     <div class="diagram-wrapper fade-in">
-      <div class="diagram-title">📍 ポジショニングマップ ー 競合4分野の中の「空白地帯」</div>
+      <div class="diagram-title">ポジショニングマップ（競合中の空白）</div>
       <svg viewBox="0 0 700 560" xmlns="http://www.w3.org/2000/svg" style="font-family:'Noto Sans JP',sans-serif">
         <defs>
           <filter id="shadow4" x="-5%" y="-5%" width="110%" height="115%">
@@ -1676,7 +1514,7 @@
         <tbody>
           <tr>
             <td><strong>月謝・費用</strong></td>
-            <td class="compare-highlight"><strong>月額8,000円</strong>（月4回）</td>
+            <td class="compare-highlight"><strong>月額6,000円〜8,000円</strong>（小4〜6特化・1枠6名・定員30名／2期目〜¥8k）</td>
             <td>月額1.0〜2万円 ＋キット代3〜6万円</td>
             <td>月額1.0〜2.0万円 ＋入会金・教材費等</td>
           </tr>
@@ -1720,15 +1558,8 @@
       </table>
     </div>
 
-    <!-- ステートメント -->
     <div class="statement fade-in">
-      <p>
-        既存の教室は、「正解のある課題」を解くための場所でした。<br>
-        しかし、AI時代に必要なのは、正解のない荒野を進む力です。<br><br>
-        組み立てキット（ロボット教室）も、教科書（プログラミング）も要りません。<br>
-        ここにあるのは、「ラジコン」と「3Dプリンタ」、そして「電気の応用」だけ。<br><br>
-        <span class="highlight">マニュアルを捨てる。それが、ふじた電気探求所の教育です。</span>
-      </p>
+      <p>正解のある課題を解く場ではなく、<strong>正解のない荒野を進む力</strong>を養う。ラジコン・3Dプリンタ・電気の応用だけ。<span class="highlight">マニュアルを捨てる。それが、ふじた電気探求所の教育。</span></p>
     </div>
   </div>
 </section>
@@ -1739,45 +1570,28 @@
     <div class="section-header fade-in">
       <div class="section-number">6</div>
       <h2 class="section-title">社会的意義と今後の展開</h2>
-      <p class="section-desc">交通安全・教育・地域の3領域でソーシャルインパクトを創出</p>
+      <p class="section-desc">安全・教育・地域へのインパクト</p>
     </div>
 
-    <!-- ソーシャルインパクト -->
-    <div class="grid-3 fade-in" style="margin-bottom:3rem">
+    <div class="grid-3 fade-in" style="margin-bottom:2rem">
       <div class="card" style="text-align:center;border-top:3px solid #f44336">
-        <div style="font-size:2.5rem;margin-bottom:0.5rem">🚗</div>
-        <h4 style="color:var(--primary);margin-bottom:0.5rem">交通安全</h4>
-        <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:0.5rem">
-          子供は死角や危険を想像しにくい
-        </p>
-        <p style="font-size:0.85rem;color:var(--primary);font-weight:600">
-          → 「運転席からの視界」体験で危険性を自分事として理解
-        </p>
+        <div style="font-size:2rem;margin-bottom:0.3rem">🚗</div>
+        <h4 style="color:var(--primary);font-size:0.95rem;margin-bottom:0.3rem">交通安全</h4>
+        <p style="font-size:0.82rem;color:var(--text-light)">死角・危険を想像しにくい子 → 運転席視界体験で自分事に。</p>
       </div>
       <div class="card" style="text-align:center;border-top:3px solid #9c27b0">
-        <div style="font-size:2.5rem;margin-bottom:0.5rem">❤️</div>
-        <h4 style="color:var(--primary);margin-bottom:0.5rem">教育・心理</h4>
-        <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:0.5rem">
-          過度な競争によるストレス・自己肯定感の低下
-        </p>
-        <p style="font-size:0.85rem;color:var(--primary);font-weight:600">
-          → 「競争」から「共創」へ。工夫や修理自体を評価
-        </p>
+        <div style="font-size:2rem;margin-bottom:0.3rem">❤️</div>
+        <h4 style="color:var(--primary);font-size:0.95rem;margin-bottom:0.3rem">教育・心理</h4>
+        <p style="font-size:0.82rem;color:var(--text-light)">競争ストレス → 共創。工夫・修理を評価。</p>
       </div>
       <div class="card" style="text-align:center;border-top:3px solid #4caf50">
-        <div style="font-size:2.5rem;margin-bottom:0.5rem">🏘️</div>
-        <h4 style="color:var(--primary);margin-bottom:0.5rem">地域社会</h4>
-        <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:0.5rem">
-          コミュニティの希薄化
-        </p>
-        <p style="font-size:0.85rem;color:var(--primary);font-weight:600">
-          → ラジコンという共通言語で多世代交流
-        </p>
+        <div style="font-size:2rem;margin-bottom:0.3rem">🏘️</div>
+        <h4 style="color:var(--primary);font-size:0.95rem;margin-bottom:0.3rem">地域社会</h4>
+        <p style="font-size:0.82rem;color:var(--text-light)">希薄化 → ラジコンを共通言語に多世代交流。</p>
       </div>
     </div>
 
-    <!-- スケールアウト戦略 -->
-    <h3 style="text-align:center;font-size:1.15rem;font-weight:700;color:var(--primary);margin-bottom:2rem" class="fade-in">🚀 スケールアウト戦略</h3>
+    <h3 style="text-align:center;font-size:1.05rem;font-weight:700;color:var(--primary);margin-bottom:1.5rem" class="fade-in">🚀 スケールアウト戦略</h3>
 
     <div class="diagram-wrapper fade-in">
       <div class="diagram-title">成長ロードマップ</div>
@@ -1835,25 +1649,11 @@
 <!-- ===== フッター ===== -->
 <footer class="footer">
   <p>⚡ ふじた電気探求所 ー 事業計画書 2026</p>
-  <p style="margin-top:0.3rem;font-size:0.8rem;opacity:0.7">マニュアルを捨てる。それが、ふじた電気探求所の教育です。</p>
+  <p style="margin-top:0.3rem;font-size:0.8rem;opacity:0.7">マニュアルを捨てる。ふじた電気探求所の教育。</p>
 </footer>
 
 <!-- ===== JavaScript ===== -->
 <script>
-// 画像パスを「このHTMLがあるフォルダ」基準で組み立て（file:// でも表示されるように）
-document.addEventListener('DOMContentLoaded', () => {
-  const pageHref = document.querySelector('base[href]')?.href || window.location.href;
-  const dir = pageHref.replace(/[^/]+$/, '');
-  const assetsBase = dir + 'assets/';
-  const heroImg = document.getElementById('hero-img');
-  if (heroImg && heroImg.dataset.src) {
-    heroImg.src = assetsBase + heroImg.dataset.src;
-  }
-  document.querySelectorAll('.concept-img').forEach((el) => {
-    if (el.dataset.src) el.src = assetsBase + el.dataset.src;
-  });
-});
-
 document.addEventListener('DOMContentLoaded', () => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1875,7 +1675,7 @@ new Chart(revenueCtx, {
     datasets: [
       {
         label: 'スクール売上',
-        data: [1584, 3696, 5760],
+        data: [1296, 2304, 2880],
         backgroundColor: '#1a237e',
         borderRadius: 4,
       },
@@ -1887,7 +1687,7 @@ new Chart(revenueCtx, {
       },
       {
         label: '広告事業',
-        data: [0, 600, 2400],
+        data: [0, 300, 1200],
         backgroundColor: '#2e7d32',
         borderRadius: 4,
       }
@@ -1939,7 +1739,7 @@ new Chart(profitCtx, {
     datasets: [
       {
         label: '売上高',
-        data: [3600, 6600, 11660],
+        data: [3312, 4908, 7580],
         backgroundColor: 'rgba(26, 35, 126, 0.15)',
         borderColor: '#1a237e',
         borderWidth: 2,
@@ -1948,14 +1748,14 @@ new Chart(profitCtx, {
       },
       {
         label: '営業利益',
-        data: [1260, 3840, 7980],
+        data: [1212, 2728, 4720],
         backgroundColor: 'rgba(255, 111, 0, 0.8)',
         borderRadius: 4,
         order: 3,
       },
       {
         label: '利益率',
-        data: [35, 58, 68],
+        data: [37, 56, 62],
         type: 'line',
         borderColor: '#2e7d32',
         backgroundColor: '#2e7d32',
