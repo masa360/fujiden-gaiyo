@@ -430,6 +430,9 @@
     .compare-header-us {
       background: linear-gradient(135deg, var(--accent), #e65100) !important;
     }
+    .highlight-row td {
+      background: rgba(26, 35, 126, 0.05);
+    }
 
     /* ===== ビジネスモデル図 ===== */
     .biz-model-flow {
@@ -770,10 +773,9 @@
 
         <!-- 左: 平日 -->
         <rect x="20" y="50" width="240" height="280" rx="14" fill="#fff" filter="url(#shadow2)" stroke="#1a237e" stroke-width="2"/>
-        <rect x="20" y="50" width="240" height="44" rx="14" fill="url(#gradWeekday)"/>
-        <rect x="20" y="80" width="240" height="14" fill="url(#gradWeekday)"/>
-        <text x="140" y="78" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">📚 平日：探求学習スクール</text>
-        <text x="140" y="98" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="9.5">小4〜6特化・1枠6名・定員30名</text>
+        <rect x="20" y="50" width="240" height="58" rx="14" fill="url(#gradWeekday)"/>
+        <text x="140" y="72" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">📚 平日：探求学習スクール</text>
+        <text x="140" y="96" text-anchor="middle" fill="rgba(255,255,255,0.95)" font-size="9.5">小4〜6特化・1枠6名・定員30名</text>
 
         <text x="45" y="125" fill="#1a237e" font-size="11" font-weight="600">エンジニアリング・デザイン</text>
         <text x="45" y="148" fill="#5a5a7a" font-size="10.5">🏗️ 3Dプリンタ・LEGOで街づくり</text>
@@ -1313,6 +1315,206 @@
         <h4 style="color:var(--primary);font-size:0.95rem;margin-bottom:0.3rem">企業</h4>
         <p style="font-size:0.82rem;color:var(--text-light)">子供向けPR・空きスペース活用。ジオラマ広告・省スペース出店。</p>
       </div>
+    </div>
+
+    <!-- ===== 民間学童市場の競合分析（学童で絞った同業・価格8,000円の位置づけ） ===== -->
+    <h3 style="text-align:center;font-size:1.1rem;font-weight:700;color:var(--primary);margin:2rem 0 0.5rem" class="fade-in">5.2.5 民間学童市場の競合分析</h3>
+    <p style="text-align:center;font-size:0.88rem;color:var(--text-light);margin-bottom:1.5rem" class="fade-in">学童で絞った時の同業カテゴリ・単価・利益構造。週1回・送迎なし・高学年が市場の盲点である根拠。</p>
+
+    <!-- カテゴリ別収益モデル比較（週1回利用想定） -->
+    <div class="table-wrapper fade-in" style="margin-bottom:1.5rem">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:20%">カテゴリ</th>
+            <th style="width:18%">ターゲット</th>
+            <th style="width:18%">週1回の月謝相場</th>
+            <th style="width:22%">主な収益源</th>
+            <th style="width:22%">特徴・コスト構造</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>英語学童</strong></td>
+            <td>低学年メイン</td>
+            <td>15,000〜25,000円</td>
+            <td>月謝＋教材費</td>
+            <td>外国人講師で人件費高。利益率20%程度。</td>
+          </tr>
+          <tr>
+            <td><strong>預かり中心型</strong></td>
+            <td>全学年</td>
+            <td>6,000〜12,000円</td>
+            <td>基本会費＋オプション</td>
+            <td>送迎・夕食・延長で単価アップ。車両・運転手が利益を圧迫。</td>
+          </tr>
+          <tr>
+            <td><strong>習い事併設型</strong></td>
+            <td>小4〜小6</td>
+            <td>10,000〜20,000円</td>
+            <td>月謝＋検定料等</td>
+            <td>プログラミング・スポーツ等。専門講師が必要。</td>
+          </tr>
+          <tr class="highlight-row">
+            <td><strong>⚡ ふじた電気探求所</strong></td>
+            <td>小4〜6特化</td>
+            <td><strong style="color:var(--accent)">6,000円→8,000円</strong></td>
+            <td>月謝のみ</td>
+            <td>送迎なし・1枠6名。固定費が低く<strong>利益率50%超</strong>を狙える構造。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 送迎有無と満足度・ボトルネック -->
+    <div class="grid-2 fade-in" style="margin-bottom:1.5rem">
+      <div class="card" style="border-left:4px solid #5a5a7a">
+        <div class="card-title">
+          <div class="card-icon" style="background:#f5f5f5;color:#5a5a7a">🚐</div>
+          送迎あり（市場の標準）
+        </div>
+        <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:0.5rem"><strong>メリット：</strong> 低学年集客に強く、満足度1位要因（ウィズダム等調査）。</p>
+        <p style="font-size:0.85rem;color:var(--text-light)"><strong>デメリット：</strong> 車両・燃料・運転手で利益圧迫。事故リスクが最大リスク。</p>
+      </div>
+      <div class="card" style="border-left:4px solid var(--accent)">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--accent-soft);color:var(--accent)">⚡</div>
+          送迎なし（ふじたの領域）
+        </div>
+        <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:0.5rem">民間では「送迎あり」が標準のため、なしは近隣限定。</p>
+        <p style="font-size:0.85rem;color:var(--primary);font-weight:600"><strong>高学年に絞れば自力通学可能</strong>→送迎コスト分を機材・探究に全振り。満足度は「利便性」より「教育の中身」で担保。</p>
+      </div>
+    </div>
+
+    <!-- 週1回・送迎なしモデルのポテンシャル -->
+    <h4 style="font-size:1rem;font-weight:700;color:var(--primary);margin-bottom:1rem" class="fade-in">週1回・送迎なしモデルの市場ポテンシャル</h4>
+    <div class="grid-3 fade-in" style="margin-bottom:1.5rem">
+      <div class="card" style="border-top:3px solid #1a237e">
+        <div class="card-title" style="font-size:0.95rem">市場規模・成長性</div>
+        <p style="font-size:0.82rem;color:var(--text-light)">学童保育全体は約6,000億円（2025年予測）で拡大。多くは低学年向け。高学年は「卒業して行き場がない」→<strong>週1回の第3の居場所</strong>は未開拓。</p>
+      </div>
+      <div class="card" style="border-top:3px solid var(--success)">
+        <div class="card-title" style="font-size:0.95rem">利益率の優位性</div>
+        <p style="font-size:0.82rem;color:var(--text-light)">民間学童の営業利益率は10〜15%が一般的（低学年の手厚い配置＋送迎コスト）。<strong>ふじたモデルは送迎なし・高学年6名・代表＋サポーターで固定費が低く、利益率50%超</strong>を狙える。</p>
+      </div>
+      <div class="card" style="border-top:3px solid var(--accent)">
+        <div class="card-title" style="font-size:0.95rem">満足度の源泉（無送迎の逆転）</div>
+        <p style="font-size:0.82rem;color:var(--text-light)">市場の不満は「ただ預かっているだけ」。送迎に割くコストを<strong>3Dプリンタ・センサー・個別探究に充て、教育的投資を可視化</strong>する。</p>
+      </div>
+    </div>
+
+    <!-- 結論：勝ち筋 -->
+    <div class="statement fade-in" style="background:linear-gradient(135deg,#1a237e,#3949ab);padding:1.5rem 2rem">
+      <p style="font-size:0.9rem;margin:0">
+        競合は「安全な輸送と長時間の預かり」という<strong>物流・サービス業</strong>で競争。ふじた電気探求所は「短時間の圧倒的探究」という<strong>研究・開発支援業</strong>にポジションを置く。<br><br>
+        <span class="highlight" style="color:var(--accent-light)">「送迎を捨て、預かり時間を捨て、高学年の熱量に全振りする。」</span><br>
+        この絞り込みが、7坪・小資本でも大手に勝てる根拠であり、FC化時に「ワンオペで再現できる」理由になる。
+      </p>
+    </div>
+
+    <!-- ===== 千里山周辺のポテンシャル（立地・商圏） ===== -->
+    <h3 style="text-align:center;font-size:1.1rem;font-weight:700;color:var(--primary);margin:2rem 0 0.5rem" class="fade-in">5.2.6 千里山周辺のポテンシャル</h3>
+    <p style="text-align:center;font-size:0.88rem;color:var(--text-light);margin-bottom:1.5rem" class="fade-in">吹田市千里山は教育熱心なファミリー層のベッドタウン。千里第一・第二・第三小の最新データで自転車・徒歩圏（約1.5〜2km）のターゲット人口と「2か月に1回来店」の市場のたくわえを算出。</p>
+
+    <!-- リアルなターゲット人口 -->
+    <h4 style="font-size:1rem;font-weight:700;color:var(--primary);margin-bottom:0.8rem" class="fade-in">1. 千里山周辺のリアルなターゲット人口</h4>
+    <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:1rem" class="fade-in">千里山駅周辺の主要3校（千里第一・第二・第三小学校）の校区で推計。千里第二約820人・千里第三約1,060人・千里第一約780人 → <strong>小学生合計約2,660人</strong>（1学年平均約440人）。年長児1学年分を加え、商圏ボリュームは<strong>約3,100人</strong>。</p>
+    <div class="table-wrapper fade-in" style="margin-bottom:1.5rem">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:28%">ターゲット枠</th>
+            <th style="width:22%">該当学年</th>
+            <th style="width:50%">近隣の想定人口</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>年長枠</strong></td>
+            <td>5〜6歳</td>
+            <td>約440人</td>
+          </tr>
+          <tr>
+            <td><strong>低学年枠</strong></td>
+            <td>小1〜小3</td>
+            <td>約1,330人</td>
+          </tr>
+          <tr>
+            <td><strong>高学年枠</strong></td>
+            <td>小4〜小6</td>
+            <td>約1,330人</td>
+          </tr>
+          <tr class="highlight-row">
+            <td><strong>合計（商圏ボリューム）</strong></td>
+            <td>年長〜小6</td>
+            <td><strong>約3,100人</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 2か月に1回来店の市場のたくわえ -->
+    <h4 style="font-size:1rem;font-weight:700;color:var(--primary);margin-bottom:0.8rem" class="fade-in">2. 「2か月に1回来店」の市場のたくわえ（客単価1,500円・土日エンタメ）</h4>
+    <div class="table-wrapper fade-in" style="margin-bottom:1.5rem">
+      <table>
+        <thead>
+          <tr>
+            <th>パターン</th>
+            <th>シェア</th>
+            <th>獲得顧客数</th>
+            <th>月間来店数</th>
+            <th>土日1日あたり</th>
+            <th>月間売上（エンタメのみ）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>A：手堅い</td>
+            <td>5%</td>
+            <td>155人</td>
+            <td>約77人</td>
+            <td>約9人/日</td>
+            <td>約11.5万円</td>
+          </tr>
+          <tr>
+            <td>B：現実的目標</td>
+            <td>10%</td>
+            <td>310人</td>
+            <td>約155人</td>
+            <td>約19人/日</td>
+            <td>約23.2万円</td>
+          </tr>
+          <tr class="highlight-row">
+            <td>C：大ヒット</td>
+            <td>15%</td>
+            <td>465人</td>
+            <td>約232人</td>
+            <td>約29人/日</td>
+            <td>約34.8万円</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 分析から見える勝算 -->
+    <h4 style="font-size:1rem;font-weight:700;color:var(--primary);margin-bottom:0.8rem" class="fade-in">3. 分析から見える勝算</h4>
+    <div class="grid-3 fade-in" style="margin-bottom:1.5rem">
+      <div class="card" style="border-top:3px solid #1a237e">
+        <div class="card-title" style="font-size:0.95rem">1日30人・月36万円の現実味</div>
+        <p style="font-size:0.82rem;color:var(--text-light)">近隣3,100人のうち<strong>15%が2か月に1回来店</strong>するだけで「休日1日30人」に到達。南千里・車で来る客層を含めれば、計画数字は極めて現実的。</p>
+      </div>
+      <div class="card" style="border-top:3px solid var(--success)">
+        <div class="card-title" style="font-size:0.95rem">高学年1,330人の宝庫</div>
+        <p style="font-size:0.82rem;color:var(--text-light)">平日学童のターゲットとなる高学年が自転車圏内だけで1,300人超。土日で楽しさを知った子の<strong>0.4%（5〜6人）</strong>が平日学童（月謝）に流れれば損益分岐突破。</p>
+      </div>
+      <div class="card" style="border-top:3px solid var(--accent)">
+        <div class="card-title" style="font-size:0.95rem">年長枠のポテンシャル</div>
+        <p style="font-size:0.82rem;color:var(--text-light)">年長児約440人は「親が週末の遊び場に最も困っている層」。安全な室内で没頭してもらえれば、リピートは「2か月に1回」→<strong>月1〜2回</strong>に伸びる余地。</p>
+      </div>
+    </div>
+
+    <div class="statement fade-in" style="background:linear-gradient(135deg,#2e7d32,#1b5e20);padding:1.25rem 2rem">
+      <p style="font-size:0.88rem;margin:0">千里山周辺は、7坪の店を満杯にして利益を出すための<strong>「たくわえ（市場規模）」としてSランク</strong>。遠方への高額広告がなくとも、チラシや地域の口コミ（PTA・ママ友ネットワーク）だけで十分に店を回せる商圏ボリューム。</p>
     </div>
 
     <h3 style="text-align:center;font-size:1.1rem;font-weight:700;color:var(--primary);margin:2rem 0 1rem" class="fade-in">5.3 公教育の限界とブルーオーシャン</h3>
