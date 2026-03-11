@@ -461,6 +461,79 @@
       font-weight: 700;
     }
 
+    /* ===== 用語ポップアップ ===== */
+    .term-popup-trigger {
+      cursor: pointer;
+      border-bottom: 1px dotted var(--primary);
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .term-popup-trigger:hover {
+      opacity: 0.85;
+    }
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .popup-overlay.is-open {
+      display: flex;
+    }
+    .popup-box {
+      background: var(--card);
+      border-radius: var(--radius);
+      max-width: 420px;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 1.5rem 1.75rem;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+    .popup-close {
+      position: absolute;
+      top: 0.75rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-light);
+      line-height: 1;
+    }
+    .popup-close:hover {
+      color: var(--text);
+    }
+    .popup-box h4 {
+      font-size: 1.05rem;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+    }
+    .popup-box ul {
+      margin: 0 0 0.75rem 1.2rem;
+      padding: 0;
+      font-size: 0.88rem;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+    .popup-box p {
+      font-size: 0.88rem;
+      color: var(--text-light);
+      margin: 0 0 0.5rem;
+      line-height: 1.7;
+    }
+    .popup-box .popup-summary {
+      margin-top: 1rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.82rem;
+      color: var(--text);
+    }
+
     /* ===== フッター ===== */
     .footer {
       background: var(--primary-dark);
@@ -717,7 +790,7 @@
 
     <!-- 例えば／要するに：教育の「料理」マトリックス -->
     <p class="fade-in" style="text-align:center;font-size:0.95rem;color:var(--primary);font-weight:600;margin:2rem 0 0.8rem">要するに、教育を「料理」に喩えると—</p>
-    <p class="fade-in" style="text-align:center;font-size:0.88rem;color:var(--text-light);margin-bottom:1.5rem">「ミールキットじゃなく、自炊力をつけさせたい」と思った親御さんが、一瞬で腹落ちする整理。</p>
+    <p class="fade-in" style="text-align:center;font-size:0.88rem;color:var(--text-light);margin-bottom:1.5rem">「<span class="term-popup-trigger" data-popup="mealkit">ミールキット</span>じゃなく、<span class="term-popup-trigger" data-popup="jishu">自炊</span>力をつけさせたい」と思った親御さんが、一瞬で腹落ちする整理。</p>
 
     <div class="table-wrapper fade-in" style="margin-bottom:1.5rem">
       <table>
@@ -738,13 +811,13 @@
           </tr>
           <tr>
             <td>ロボット・プログラミング教室</td>
-            <td>ミールキット</td>
+            <td><span class="term-popup-trigger" data-popup="mealkit">ミールキット</span></td>
             <td>ロジックの理解・最短で成功体験</td>
             <td>決まったキットがないと作れない</td>
           </tr>
           <tr class="highlight-row">
             <td><strong>ふじた電気探求所</strong></td>
-            <td><strong>究極の自炊（インフラ作り）</strong></td>
+            <td><strong>究極の<span class="term-popup-trigger" data-popup="jishu">自炊</span>（インフラ作り）</strong></td>
             <td><strong>野生の思考。材料調達から失敗まで丸ごと体験</strong></td>
             <td>時間はかかる。最初は見栄えが悪いことも</td>
           </tr>
@@ -752,7 +825,7 @@
       </table>
     </div>
 
-    <h4 style="font-size:1rem;font-weight:700;color:var(--primary);margin-bottom:0.8rem" class="fade-in">🍳 「自炊型教育」が最強である3つの理由</h4>
+    <h4 style="font-size:1rem;font-weight:700;color:var(--primary);margin-bottom:0.8rem" class="fade-in">🍳 「<span class="term-popup-trigger" data-popup="jishu">自炊</span>型教育」が最強である3つの理由</h4>
     <div class="grid-3 fade-in" style="margin-bottom:1.5rem">
       <div class="card" style="border-top:3px solid #1a237e">
         <div class="card-title" style="font-size:0.9rem">① 汎用性（冷蔵庫のもので作れる）</div>
@@ -764,7 +837,7 @@
       </div>
       <div class="card" style="border-top:3px solid #2e7d32">
         <div class="card-title" style="font-size:0.9rem">③ 低コスト・高利益</div>
-        <p style="font-size:0.82rem;color:var(--text-light)">ミールキット（専用教材）は仕入れが高く利益を圧迫。自炊は食材（汎用部品）が安く、<strong>月謝6,000円でも高利益率</strong>を維持しつつ、子供には「無限の材料」を与えられる。</p>
+        <p style="font-size:0.82rem;color:var(--text-light)"><span class="term-popup-trigger" data-popup="mealkit">ミールキット</span>（専用教材）は仕入れが高く利益を圧迫。<span class="term-popup-trigger" data-popup="jishu">自炊</span>は食材（汎用部品）が安く、<strong>月謝6,000円でも高利益率</strong>を維持しつつ、子供には「無限の材料」を与えられる。</p>
       </div>
     </div>
 
@@ -2110,6 +2183,55 @@ new Chart(profitCtx, {
       }
     }
   }
+});
+</script>
+
+<!-- 用語ポップアップ（ミールキット・自炊） -->
+<div id="popup-overlay" class="popup-overlay" aria-hidden="true">
+  <div class="popup-box" id="popup-mealkit" role="dialog" aria-labelledby="popup-mealkit-title" style="display:none">
+    <button type="button" class="popup-close" aria-label="閉じる" onclick="closeTermPopup()">&times;</button>
+    <h4 id="popup-mealkit-title">🍱 ミールキットって？</h4>
+    <p><strong>意味：</strong> あらかじめ「材料・レシピ・分量」がそろったセット。</p>
+    <p><strong>教育でいうと：</strong> 高価な専用キットやブロックを、マニュアル通りに組み立てて「正解」を作る学び。</p>
+    <p><strong>本質：</strong> かんたんに成功体験は得られるが、失敗の余白が少なく、材料や手順が決まっていないと動けないという弱点を抱えた「ミールキット型教育」。</p>
+    <div class="popup-summary">一言：用意されたキットを、マニュアル通りに組み立てる学び。</div>
+  </div>
+  <div class="popup-box" id="popup-jishu" role="dialog" aria-labelledby="popup-jishu-title" style="display:none">
+    <button type="button" class="popup-close" aria-label="閉じる" onclick="closeTermPopup()">&times;</button>
+    <h4 id="popup-jishu-title">🍳 自炊って？</h4>
+    <p><strong>意味：</strong> 冷蔵庫やキッチンにあるものを組み合わせて、自分で料理すること。</p>
+    <p><strong>教育でいうと：</strong> 塩ビパイプ・100均・ジャンク部品など、手元にある資源を組み合わせて解決策をひねり出す学び。</p>
+    <p><strong>本質：</strong> 失敗しながら原因を探り、予算や材料の制約の中で工夫することで、ブリコラージュ（あるもので何とかする力）と現場のサバイバル力が育つ「自炊型教育」。</p>
+    <div class="popup-summary">一言：手元の材料と限られた予算で、ゼロから工夫してつくる学び。</div>
+  </div>
+</div>
+<script>
+(function() {
+  var overlay = document.getElementById('popup-overlay');
+  document.querySelectorAll('.term-popup-trigger').forEach(function(el) {
+    el.addEventListener('click', function() {
+      var id = this.getAttribute('data-popup');
+      overlay.querySelectorAll('.popup-box').forEach(function(box) { box.style.display = 'none'; });
+      var target = document.getElementById('popup-' + id);
+      if (target) {
+        target.style.display = 'block';
+        overlay.classList.add('is-open');
+        overlay.setAttribute('aria-hidden', 'false');
+      }
+    });
+  });
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeTermPopup();
+  });
+})();
+function closeTermPopup() {
+  var overlay = document.getElementById('popup-overlay');
+  overlay.classList.remove('is-open');
+  overlay.setAttribute('aria-hidden', 'true');
+  overlay.querySelectorAll('.popup-box').forEach(function(box) { box.style.display = 'none'; });
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeTermPopup();
 });
 </script>
 
